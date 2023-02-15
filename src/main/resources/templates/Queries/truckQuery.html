@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <script src="js/base.js"></script>
+
+</head>
+<body>
+
+<div class="container my-2" align="center">
+  <h3 th:text="${prueba}"></h3>
+  <table>
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Number</th>
+      <th>Capacity</th>
+      <th>Status</th>
+      <th>CityId</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="truck:${queryList}">
+      <td th:text="${truck?.id}"></td>
+      <td th:text="${truck?.number}"></td>
+      <td th:text="${truck?.capacity}"></td>
+      <td th:text="${truck?.status}"></td>
+      <td th:text="${truck?.CityId}"></td>
+      <td><button type="button" th:attr="onclick=|prueba('/truck/${truck?.id}', 'principal');|">Select</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

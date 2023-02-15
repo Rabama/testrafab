@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="js/base.js"></script>
+
+</head>
+<body>
+
+<div class="container my-2" align="center">
+    <h3 th:text="${prueba}"></h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Select</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="city:${queryList}">
+            <td th:text="${city?.id}"></td>
+            <td th:text="${city?.name}"></td>
+            <td><button type="button" th:attr="onclick=|prueba('/city/${city?.id}', 'principal');|">Select</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

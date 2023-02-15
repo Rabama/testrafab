@@ -1,0 +1,61 @@
+
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    font-size:100%;
+}
+
+li {
+    cursor: pointer;
+}
+
+div.contenedor {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+div.menu {
+    flex: 4%;
+    border-style: solid;
+    border-width: 5px;
+    border-color: red;
+    height: 100vh;
+    padding: 15px;
+}
+
+div.principal {
+    flex: 43%;
+    border-style: solid;
+    border-width: 5px;
+    border-color: blue;
+    height: 100vh;
+    padding: 15px;
+}
+
+div.consultas {
+    flex: 35%;
+    border-style: solid;
+    border-width: 5px;
+    border-color: green;
+    height: 100vh;
+    padding: 15px;
+}
+
+@media (max-width: 1500px) {
+    div.menu {
+        flex: 100%;
+        height: auto;
+    }
+    div.principal {
+        flex: 100%;
+        height: auto;
+    }
+    div.consultas {
+        flex: 100%;
+        height: auto;
+    }
+}

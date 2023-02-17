@@ -1,7 +1,5 @@
 package es.tatanca.test.Entities.Cargo;
 
-import es.tatanca.test.Entities.City.City;
-
 import java.util.List;
 
 public interface CargoService {

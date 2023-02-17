@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="js/base.js"></script>
+
+</head>
+<body>
+
+<div class="container my-2" align="center">
+    <h3 th:text="${prueba}"></h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Distance</th>
+            <th>Time</th>
+            <th>City0</th>
+            <th>City1</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="distance:${queryList}">
+            <td th:text="${distance?.id}"></td>
+            <td th:text="${distance?.distance}"></td>
+            <td th:text="${distance?.time}"></td>
+            <td th:text="${distance?.city0}"></td>
+            <td th:text="${distance?.city1}"></td>
+            <td><button type="button" th:attr="onclick=|prueba('/distance/${distance?.id}', 'principal');|">Select</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

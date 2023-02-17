@@ -15,9 +15,9 @@ public class Driver {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long id;
+    public Long id;
     @Column(name = "name")
-    private String name;
+    public String name;
     @Column(name = "surname")
     private String surname;
     @Column(name = "workedHours")

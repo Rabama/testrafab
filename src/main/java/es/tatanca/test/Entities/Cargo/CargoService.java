@@ -5,13 +5,15 @@ import java.util.List;
 public interface CargoService {
 
 
-    void saveCargo(Cargo cargo);
+    Cargo create(final Cargo cargo);
 
-    List<Cargo> getAllCargo();
+    Cargo update(final Cargo cargo);
 
-    Cargo getEqualByCampo(String campo, String valor);
+//    public Long saveTruck(Truck truck);
 
-    List<Cargo> getLikeByCampo(String campo, String valor);
+    public List<Cargo> findAll();
+
+    public List<Cargo> getLikeByCampo(String campo, String valor);
 
 
 }

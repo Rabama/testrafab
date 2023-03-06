@@ -5,9 +5,11 @@ import java.util.List;
 public interface CityService {
 
 
-    void saveCity(City city);
+    Long saveCity(City city) throws Exception;
 
-    List<City> getAllCity();
+    public List<City> getLikeName(String valor);
+
+    List<City> findAll();
 
     City getEqualByCampo(String campo, String valor);
 

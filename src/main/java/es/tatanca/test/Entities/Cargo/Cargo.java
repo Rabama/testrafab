@@ -1,10 +1,12 @@
 package es.tatanca.test.Entities.Cargo;
 
+import es.tatanca.test.Entities.City.City;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.beans.factory.annotation.Value;
 
 
@@ -12,40 +14,41 @@ import org.springframework.beans.factory.annotation.Value;
 @Setter
 @Getter
 @NoArgsConstructor
+@DynamicUpdate
 @Table(name = "POCargo")
 public class Cargo {
 
-
-    /*   public Cargo() {
-        System.out.println("Cargo creado 1.");
-    }
-
-    public Cargo(String name, Double weight, String status, Long CityId0, Long CityId1, String Address0, String Address1, Long upload, Long unload) {
-        System.out.println("Cargo creado 2.");
-    }
-*/
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     public Long id;
+
     @Column(name = "name")
     public String name;
+
     @Column(name = "weight")
     private Double weight;
+
     @Column(name = "status")
-    private String status;
+    private CargoStatus status;
 
-    @Column(name = "CityId0")
-    private Long CityId0;
+    @ManyToOne // (fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_upcity", nullable = false, updatable = true)
+    private City upcity;
 
-    @Column(name = "CityId1")
-    private Long CityId1;
-    @Column(name = "Address0")
-    private String Address0;
-    @Column(name = "Address1")
-    private String Address1;
+    @ManyToOne // (fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_uncity", nullable = false, updatable = true)
+    private City uncity;
+
+    @Column(name = "address0")
+    private String address0;
+
+    @Column(name = "address1")
+    private String address1;
+
     @Column(name = "upload")
     private Long upload;
+
     @Column(name = "unload")
     private Long unload;
 

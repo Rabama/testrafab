@@ -1,0 +1,48 @@
+<div id="queryHead">
+  <!--
+      <meta th:name="_csrf" th:content="${_csrf.token}"/>
+      <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+  -->
+  <div id="valor"></div>
+  <div id="origenFd"></div>
+  <div id="destinoId"></div>
+
+  <form action="#" method="POST">
+    <label for="querynumber">Name:</label>
+    <input type="text" id="querynumber" name="querynumber">
+    <br>
+    <label for="querystatus">Status</label>
+    <input type="checkbox" id="querystatus" name="querystatus" value="">
+    <br>
+    <input type="hidden" id="csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    <input type="button" value="Search" onclick="loadJS('truck',search, document.body);">
+  </form>
+
+  <script>
+    // function search() {
+    //
+    //     alert("search() xxx");
+    //
+    //     let xhr = new XMLHttpRequest();
+    //     let url = "/query/truck";
+    //     xhr.open("POST", url, true);
+    //     xhr.setRequestHeader("Content-Type", "application/json");
+    //     xhr.onreadystatechange = function () {
+    //         if (xhr.readyState === 4 && xhr.status === 200) {
+    //             var json = JSON.parse(xhr.responseText);
+    //             console.log(json.email + ", " + json.password);
+    //         }
+    //     };
+    //     let data = JSON.stringify(
+    //         {"email": "hey@mail.com",
+    //             "password": "101010"});
+    //     xhr.send(data);
+    //     return false;
+    // }
+  </script>
+
+</div>
+
+<div id="queryBody">
+
+</div>

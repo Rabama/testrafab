@@ -1,0 +1,32 @@
+<h3>City query body</h3>
+
+Prueba: <span th:text="${prueba}"></span><br>
+Mode: <span th:text="${mode}"></span><br>
+
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cityq:${cityList}">
+        <td th:text="${cityq?.id}"></td>
+        <td th:text="${cityq?.name}"></td>
+
+        <td>
+            <span th:if="${mode == 0}">
+                <button type="button" th:attr="onClick=|loadCity(${cityq?.id});|">Select</button>
+            </span>
+            <span th:unless="${mode == 0}">
+                <button type="button" th:attr="onClick=|querySelectById(${cityq?.id});|">Select</button>
+            </span>
+        </td>
+        <!--
+                <td><button type="button" th:attr="onClick=|querySelectById(${cityq?.id});|">Select option 1</button></td>
+                <td><button type="button" th:attr="onClick=|loadCity(${cityq?.id});|">Select option 2</button></td>
+        -->
+    </tr>
+    </tbody>
+</table>

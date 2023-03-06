@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <title>Title</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/base.css" />
+
+    <script src="/js/base.js"></script>
+    <script src="/js/cityQueries.js"></script>
+    <script src="/js/truckQueries.js"></script>
+    <script src="/js/cargoQueries.js"></script>
+    <script src="/js/distanceQueries.js"></script>
+    <script src="/js/driverQueries.js"></script>
+    <script src="/js/orderQueries.js"></script>
+
+</head>
+<body>
+
+<div class="contenedor">
+
+    <div id="menu" class="menu">
+        Menú principal<br/>
+        <ul class="menu">
+
+            <li><a onclick="loadCity(0);">City</a></li>
+
+            <li><a onclick="loadTruck(0);">Truck</a></li>
+
+            <li><a onclick="loadCargo(0);">Cargo</a></li>
+
+            <li><a onclick="loadDistance(0);">Distance</a></li>
+
+            <li><a onclick="loadDriver(0);">Driver</a></li>
+
+            <li><a onclick="loadOrder(0);">Order</a></li>
+
+        </ul>
+
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+
+    </div>
+
+    <div id="principal" class="principal">
+        principal
+    </div>
+
+    <div id="consultas" class="consultas">
+        consultas
+    </div>
+
+</div>
+
+</body>
+</html>

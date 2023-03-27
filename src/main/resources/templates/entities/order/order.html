@@ -1,0 +1,193 @@
+<h3>Order entity</h3>
+
+<hr><br>
+
+<!--@thymesVar id="order" type="es.tatanca.z06.entities.Order.Order"-->
+<!--@thymesVar id="completedValues" type="es.tatanca.z06.entities.Order.OrderCompleted"-->
+<!--@thymesVar id="truckid" type="java.lang.Long"-->
+
+
+<label for="id">Id:</label>
+<input type="text" id="id" name="id" th:value="${order?.id}" size="4" readonly>
+<!--<button type="button" onclick=" orderSearch(); ">Search</button>-->
+<br><br>
+
+<label for="completed">Completed:</label>
+<select id="completed" name="completed">
+    <option th:each="compOpt : ${completedValues}"
+            th:value="${compOpt}"
+            th:text="${compOpt}"
+            th:selected="${compOpt} == ${order?.completed}"></option>
+</select>
+<br><br>
+
+<span th:if="${employee}">
+    <label for="workcityname">Work city:</label>
+    <input type="text" id="workcityid" name="workcityid" onchange="getOrderWorkCity();" size="4" readonly>
+    <input type="text" id="workcityname" name="workcityname">
+    <button type="button" onclick="queryHead('workcityname', 'id', 'workcityid', 'queryname', '/queries/city/head/1', 'consultas');">Search</button>
+    <button type="button" onclick="orderWorkCityClear(); ">Clear</button>
+    <br><br>
+</span>
+
+<label for="truckid">Truck:</label>
+<input type="text" id="truckid" name="truckid" onchange="getOrderTruck();" th:value="${order?.truck?.id}" size="4" readonly>
+<label for="trucknumber">Number:</label>
+<input type="text" id="trucknumber" name="trucknumber" th:value="${trucknumber}">
+<input type="text" id="truckcapacity" name="truckcapacity" th:value="${truckcapacity}" size="4" readonly>
+<!-- <button type="button" onclick="queryHead('trucknumber', 'id', 'truckid', 'querynumber', '/queries/truck/head/1', 'consultas');">Search</button> -->
+<button type="button" onclick="orderTruckSearch();">Search</button>
+<button type="button" onclick="orderTruckClear(); ">Clear</button>
+<br><br>
+
+<label for="driver1id">Driver 1:</label>
+<input type="text" id="driver1id" name="driver1id" onchange="getOrderDriver1();" th:value="${order?.driver1?.id}" maxlength="4" size="4" readonly>
+<label for="driver1name">Name:</label>
+<input type="text" id="driver1name" name="driver1name" th:value="${driver1name}">
+<span th:if="${employee}">
+<!-- <button type="button" onclick="queryHead('driver1name', 'id', 'driver1id', 'queryname', '/queries/driver/head/1', 'consultas');">Buscar</button> -->
+<button type="button" onclick="orderDriverSearch(1);">Buscar</button>
+<button type="button" onclick="orderDriverClear(1); ">Clear</button>
+</span>
+<label for="driver1hours">Hours:</label>
+<input type="text" id="driver1hours" name="driver1hours" th:value="${driver1hours}" size="4" readonly>
+<br><br>
+
+<label for="driver2id">Driver 2:</label>
+<input type="text" id="driver2id" name="driver2id" onchange="getOrderDriver2();" th:value="${order?.driver2?.id}" maxlength="4" size="4" readonly>
+<label for="driver2name">Name:</label>
+<input type="text" id="driver2name" name="driver2name" th:value="${driver2name}">
+<span th:if="${employee}">
+<!-- <button type="button" onclick="queryHead('driver2name', 'id', 'driver2id', 'queryname', '/queries/driver/head/1', 'consultas');">Buscar</button> -->
+<button type="button" onclick="orderDriverSearch(2);">Buscar</button>
+<button type="button" onclick="orderDriverClear(2); ">Clear</button>
+</span>
+<label for="driver2hours">Hours:</label>
+<input type="text" id="driver2hours" name="driver2hours" th:value="${driver2hours}" size="4" readonly>
+<br><br>
+
+<label for="driver3id">Driver 3:</label>
+<input type="text" id="driver3id" name="driver3id" onchange="getOrderDriver3();" th:value="${order?.driver3?.id}" maxlength="4" size="4" readonly>
+<label for="driver3name">Name:</label>
+<input type="text" id="driver3name" name="driver3name" th:value="${driver3name}">
+<span th:if="${employee}">
+<!-- <button type="button" onclick="queryHead('driver3name', 'id', 'driver3id', 'queryname', '/queries/driver/head/1', 'consultas');">Buscar</button> -->
+<button type="button" onclick="orderDriverSearch(3);">Buscar</button>
+<button type="button" onclick="orderDriverClear(3); ">Clear</button>
+</span>
+<label for="driver3hours">Hours:</label>
+<input type="text" id="driver3hours" name="driver3hours" th:value="${driver3hours}" size="4" readonly>
+<br><br>
+
+<span th:if="${employee}">
+    <button type="button" onclick=" orderSearch(); ">Search</button>
+    <input type="button" value="Save" onclick="saveOrder();">
+    <button type="button" onclick="newOrder();">New</button>
+    <button type="button" onclick="delOrder();">Delete</button>
+</span>
+
+<hr>
+
+<div id="cargos">
+    <h3>Cargos</h3>
+    <!--
+    <label for="cargoid">Cargo:</label>
+    <input type="text" id="cargoid" name="cargoid" onchange="orderCargoAppend();" maxlength="4" size="4">
+    -->
+
+    <label for="weight">Weight:</label>
+    <input type="text" id="weight" name="weight" maxlength="4" size="4" readonly>
+    <label for="hours">Hours:</label>
+    <input type="text" id="hours" name="hours" maxlength="4" size="4" readonly>
+    <br><br>
+
+    <input type="hidden" id="cargoid" name="cargoid" onchange="orderCargoAppendPRE3();" maxlength="4" size="4">
+
+    <span th:if="${employee}">
+
+    <label for="upcityname">Upcity:</label>
+    <input type="text" id="upcityid" name="upcityid" onchange="getOrderUpcity();" size="4" readonly>
+    <input type="text" id="upcityname" name="upcityname">
+    <button type="button" onclick="queryHead('upcityname', 'id', 'upcityid', 'queryname', '/queries/city/head/1', 'consultas');">Search</button>
+    <button type="button" onclick="orderUpcityClear(); ">Clear</button>
+    <br><br>
+
+    <label for="uncityname">Uncity:</label>
+    <input type="text" id="uncityid" name="uncityid" onchange="getOrderUncity();" size="4" readonly>
+    <input type="text" id="uncityname" name="uncityname">
+    <button type="button" onclick="queryHead('uncityname', 'id', 'uncityid', 'queryname', '/queries/city/head/1', 'consultas');">Search</button>
+    <button type="button" onclick="orderUncityClear(); ">Clear</button>
+    <br><br>
+
+    <button type="button" onclick="orderCargoAppendPRE();">Append</button>
+
+    </span>
+
+    <h3 th:value="${cargoOrderList}"></h3>
+
+    <table id="cargoTable" border="1px">
+        <thead>
+
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <!--            <th style="display:none;">upCityId</th> -->
+            <th>upCityId</th>
+            <th>unCityId</th>
+            <th>upCityName</th>
+            <th>unCityName</th>
+            <th>Upload</th>
+            <th>Unload</th>
+            <th>Weight</th>
+            <th>Total</th>
+
+            <th>Hours</th>
+
+            <!--            <th>Driver1</th>
+                        <th>Driver2</th>
+                        <th>Driver3</th> -->
+
+            <th>Status</th>
+
+            <th>Options</th>
+        </tr>
+
+        </thead>
+        <tbody>
+
+        <tr th:each="colq:${cargoOrderList}">
+            <td th:text="${colq?.id}"></td>
+            <td th:text="${colq?.name}"></td>
+
+            <th th:text="${colq?.upCityId}"></th>
+            <th th:text="${colq?.unCityId}"></th>
+            <td th:text="${colq?.upCityName}"></td>
+            <td th:text="${colq?.unCityName}"></td>
+
+            <td th:text="${colq?.upload}"></td>
+            <td th:text="${colq?.unload}"></td>
+
+            <td th:text="${colq?.weight}"></td>
+            <td>---</td> <!-- Total -->
+
+            <td th:text="${colq?.hours}"></td>
+
+            <!--            <td th:text="${colq?.driver1}"></td>
+                        <td th:text="${colq?.driver2}"></td>
+                        <td th:text="${colq?.driver3}"></td> -->
+
+            <td th:text="${colq?.status}"></td>
+
+            <td>
+                <span th:if="${employee}">
+                <input type="button" value="Subir"  th:attr="onClick=|orderCargoRowUp(${colq?.wayId});|"/>
+                <input type="button" value="Bajar"  th:attr="onCLick=|orderCargoRowDown(${colq?.wayId});|"/>
+                <input type="button" value="Borrar" th:attr="onClick=|orderCargoRowDelete(${colq?.wayId});|"/>
+                </span>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>

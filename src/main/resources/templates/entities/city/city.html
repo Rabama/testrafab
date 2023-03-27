@@ -1,0 +1,18 @@
+<h3>City entity</h3>
+
+<hr><br>
+
+<!--<label for="id">Id:</label>-->
+<input type="hidden" id="id" name="id" th:value="${city?.id}" size="4" readonly>
+<!--<br><br>-->
+
+<label for="name">Name:</label>
+<input type="text" id="name" name="name" th:value="${city?.name}">
+<!--<button type="button" onclick="queryHead('name', 'id', 'id', 'queryname', '/queries/city/head/0', 'consultas');">Buscar</button>-->
+<br><br>
+
+<button type="button" onclick="queryHead('name', 'id', 'id', 'queryname', '/queries/city/head/0', 'consultas');">Search</button>
+<input type="button" value="Save" onclick="saveCity();">
+
+<button type="button" onclick="newCity();">New</button>
+<button type="button" onclick="delCity();">Delete</button>

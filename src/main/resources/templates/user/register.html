@@ -1,0 +1,31 @@
+<h3>User Registration</h3>
+
+<br><br>
+
+<!-- <form action="#" method="POST"> -->
+
+<h3 th:text="${user?.id}"></h3>
+
+<pre>
+
+    Name:     <input type="text" id="username" name="username" th:value="${user?.username}"/>
+
+    Password: <input type="password" id="password" name="password"/>
+
+    <span th:if="${user?.isAdmin}">
+
+    Role(s):  <input type="checkbox" id="admin"    name="roles" value="Admin"/>Admin
+              <input type="checkbox" id="employee" name="roles" value="Employee"/>Employee
+              <input type="checkbox" id="driver"   name="roles" value="Driver"/>Driver
+    </span>
+
+    <span th:if="${user?.isEmployee}">
+    Role(s):  <input type="checkbox" id="employee" name="roles" value="Employee"/>Employee
+    </span>
+
+
+              <input type="button" value="Register" onclick="saveUser();"/>
+
+</pre>
+
+<!-- </form> -->

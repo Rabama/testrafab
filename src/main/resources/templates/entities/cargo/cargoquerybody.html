@@ -1,0 +1,38 @@
+<h3>Cargo query body</h3>
+
+<!--Mode:--> <span th:hidden="${mode}"></span><br>
+
+<table border="1px">
+    <thead>
+    <tr>
+        <th>Status</th>
+        <!--<th>Id</th>-->
+        <th>Name</th>
+        <th>Upcity</th>
+        <th>Uncity</th>
+        <th>Weight</th>
+
+        <th>------</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cargoq:${cargoSearchList}">
+        <td th:text="${cargoq?.status}"></td>
+        <!--<td th:text="${cargoq?.id}"></td>-->
+        <td th:text="${cargoq?.name}"></td>
+        <td th:text="${cargoq?.upCity}"></td>
+        <td th:text="${cargoq?.unCity}"></td>
+        <td th:text="${cargoq?.weight}"></td>
+
+        <td>
+            <span th:if="${mode == 0}">
+                <button type="button" th:attr="onClick=|loadCargo(${cargoq?.id});|">Select</button>
+            </span>
+            <span th:unless="${mode == 0}">
+                <button type="button" th:attr="onClick=|querySelectById(${cargoq?.id});|">Select</button>
+            </span>
+        </td>
+
+    </tr>
+    </tbody>
+</table>

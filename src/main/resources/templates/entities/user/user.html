@@ -1,0 +1,17 @@
+<h3>User</h3>
+
+<br><br>
+
+<input type="hidden" id="userid" name="userid" th:value="${user?.id}" readonly/>
+
+<pre>
+
+Id:       <span th:text="${user?.id}"></span>
+
+Name:     <input type="text" id="username" name="username" th:value="${user?.username}"/>
+
+Password: <input type="password" id="password" name="password"/>
+
+          <input type="button" value="Register" onclick="userSave();"/>
+
+</pre>

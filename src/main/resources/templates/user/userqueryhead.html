@@ -1,0 +1,24 @@
+<div id="queryHead">
+
+    <!--@thymesVar id="mode" type="java.lang.Integer"-->
+
+    <h3>User query head</h3>
+
+    <div id="valor"></div>
+    <div id="origenFd"></div>
+    <div id="destinoId"></div>
+
+    Mode: <span th:text="${mode}"></span><br>
+
+    <label for="queryusername">Name:</label>
+    <input type="text" id="queryusername" name="queryusername">
+
+    <button type="button" id="search" th:attr="onClick=|adminUserFind(${mode});|">Search</button>
+
+    <hr>
+
+</div>
+
+<div id="queryBody">
+
+</div>

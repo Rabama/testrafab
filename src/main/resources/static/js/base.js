@@ -10,15 +10,15 @@ function xhRequest(url, resultOK, resultERROR, bundle) {
                     break;
                 }
                 case 400: { // BAD_REQUEST
-                    resultERROR(xhr.status);
+                    resultERROR(xhr.status + ": " + xhr.responseText);
                     break;
                 }
                 case 403: { // Acceso a la URL prohibido.
-                    resultERROR(xhr.status);
+                    resultERROR(xhr.status + ": " + xhr.responseText);
                     break;
                 }
                 default: {
-                    resultERROR(xhr.status);
+                    resultERROR(xhr.status + ": " + xhr.responseText);
                 }
             }
         }
@@ -26,19 +26,54 @@ function xhRequest(url, resultOK, resultERROR, bundle) {
     xhr.send(null);
 } // xhRequest
 
+// *********************************************************************************************************************
+function xhRequest2(methodPost, url, resultOK, resultERROR, bundle) {
+    let token = "";
+    let header = "";
 
-function loadDiv(path, divId) {
     let xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if ((xhr.readyState === 4) && (xhr.status === 200)) {
-            document.getElementById(divId).innerHTML = xhr.responseText;
-        }
+
+    if (methodPost) {
+        token = document.querySelector('meta[name="_csrf"]').content;
+        header = document.querySelector('meta[name="_csrf_header"]').content;
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+    } else {
+        xhr.open("GET", url, true);
     }
-    xhr.open("GET", path, true);
-    xhr.send();
-} // loadDiv
 
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            switch (xhr.status) {
+                case 200:
+                    if (xhr.responseText.substring(0, 5) === "Error") {
+                        resultERROR(xhr.responseText);
+                    } else {
+                        resultOK(xhr.responseText, bundle);
+                    }
+                    break;
 
+                case 400:  // BAD_REQUEST
+                    resultERROR(xhr.status + ": " + xhr.responseText);
+                    break;
+
+                case 403:  // Acceso prohibido a la URL.
+                    resultERROR(xhr.status + ": " + xhr.responseText);
+                    break;
+
+                default:
+                    resultERROR(xhr.status + ": " + xhr.responseText);
+
+            }
+        }
+    };
+    if (methodPost) {
+        xhr.setRequestHeader(header, token);
+        xhr.send(bundle);
+    } else {
+        xhr.send(null);
+    }
+} // xhRequest2
 
 function queryHead(origenId, origenFd, destinoId, campoFrm, recurso, panelId) {
 //    alert("queryHead");
@@ -66,10 +101,10 @@ function queryHeadERROR(number) {
     alert("queryHeadERROR. ERROR "+ number);
 }
 
-// Opción 1: Actualiamos los campos.
-// Opción 2: Actualimos el panel.
+// Opción 1: Actualizamos los campos.
+// Opción 2: Actualizamos el panel.
 function querySelectById(valor) {
-    alert("querySelectById.destinoId "+document.getElementById("destinoId").value+" con valor "+valor);
+//    alert("querySelectById.destinoId "+document.getElementById("destinoId").value+" con valor "+valor);
 
     let campo = document.getElementById("destinoId").value;
     let fld = document.getElementById(campo);
@@ -92,79 +127,4 @@ function querySelectById(valor) {
 
 
 
-// Desde truck.html
-function getTruckCity() {
-    let value = document.getElementById("cityid").value;
-    let xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", "/city/"+value, false );
-    xmlHttp.send( null );
-    let response = JSON.parse(xmlHttp.responseText);
-    document.getElementById("cityname").value = response.name;
-} // getTruckCity
 
-// Desde cargo.html
-function getCargoUpCity() {
-    alert("getCargoUpCity " + document.getElementById("upcity").value);
-    let value = document.getElementById("upcity").value;
-    let xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", "/city/"+value, false );
-    xmlHttp.send( null );
-    let response = JSON.parse(xmlHttp.responseText);
-    document.getElementById("upcityname").value = response.name;
-} // getCargoUpCity
-
-// Desde cargo.html
-function getCargoUnCity() {
-    alert("getCargoUnCity " + document.getElementById("uncity").value);
-    let value = document.getElementById("uncity").value;
-    let xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", "/city/"+value, false );
-    xmlHttp.send( null );
-    let response = JSON.parse(xmlHttp.responseText);
-    document.getElementById("uncityname").value = response.name;
-} // getCargoUnCity
-
-
-function getOrderTruck() {
-    let url = "/truck/" + document.getElementById("truckid").value;
-    xhRequest(url, getOrderTruckOK, getOrderTruckERROR);
-}
-function getOrderTruckOK(response) {
-    document.getElementById("trucknumber").value = JSON.parse(response).number;
-}
-function getOrderTruckERROR(number) {
-    alert("getOrderTruck. ERROR "+ number);
-}
-
-function getOrderDriver1() {
-    let url = "/driver/" + document.getElementById("driver1id").value;
-    xhRequest(url, getOrderDriver1OK, getOrderDriver1ERROR);
-}
-function getOrderDriver1OK(response) {
-    document.getElementById("driver1name").value = JSON.parse(response).name;
-}
-function getOrderDriver1ERROR(name) {
-    alert("getOrderDriver1. ERROR "+ name);
-}
-
-function getOrderDriver2() {
-    let url = "/driver/" + document.getElementById("driver2id").value;
-    xhRequest(url, getOrderDriver2OK, getOrderDriver2ERROR);
-}
-function getOrderDriver2OK(response) {
-    document.getElementById("driver2name").value = JSON.parse(response).name;
-}
-function getOrderDriver2ERROR(name) {
-    alert("getOrderDriver2. ERROR "+ name);
-}
-
-function getOrderDriver3() {
-    let url = "/driver/" + document.getElementById("driver3id").value;
-    xhRequest(url, getOrderDriver3OK, getOrderDriver3ERROR);
-}
-function getOrderDriver3OK(response) {
-    document.getElementById("driver3name").value = JSON.parse(response).name;
-}
-function getOrderDriver3ERROR(name) {
-    alert("getOrderDriver3. ERROR "+ name);
-}

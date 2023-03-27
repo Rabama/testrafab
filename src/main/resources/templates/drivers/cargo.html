@@ -1,0 +1,49 @@
+<h3>Drivers cargo entity</h3>
+
+<br>
+
+<!--@thymesVar id="orderid" type="java.lang.String"-->
+<!--@thymesVar id="ordercompleted" type="java.lang.String"-->
+<!--@thymesVar id="truckid" type="java.lang.Long"-->
+<!--@thymesVar id="trucknumber" type="java.lang.String"-->
+
+
+<div id="cargo">
+    <input type="hidden" id="waypointId" name="waypointId" th:value="${waypoint?.id}">
+    <label>Cargo: <span th:text="${waypoint?.id}"></span></label> - <label><span th:text="${waypoint?.cargo?.name}"></span></label><br>
+<!--   <label>Operation: <span th:text="${operation}"></span></label> -->
+</div>
+<br>
+
+<label for="driver1">Driver 1:</label>
+<select id="driver1" name="driver1">
+    <option th:each="Opt : ${driverNameList}"
+            th:value="${Opt}"
+            th:text="${Opt}"
+            th:selected="${Opt} == ${driver1selected}"></option>
+</select>
+<br>
+<label for="driver2">Driver 2:</label>
+<select id="driver2" name="driver2">
+    <option th:each="Opt : ${driverNameList}"
+            th:value="${Opt}"
+            th:text="${Opt}"
+            th:selected="${Opt} == ${driver2selected}"></option>
+</select>
+<br>
+<label for="driver3">Driver 3:</label>
+<select id="driver3" name="driver3">
+    <option th:each="Opt : ${driverNameList}"
+            th:value="${Opt}"
+            th:text="${Opt}"
+            th:selected="${Opt} == ${driver3selected}"></option>
+</select>
+<br>
+
+<label for="workedhours">Worked hours:</label>
+<input type="text" id="workedhours" name="workedhours" th:value="${workedHours}" size="4">
+<br><br>
+
+<span th:if="${write}">
+<input type="button" value="Save" onclick="saveCargoOrder();">
+</span>

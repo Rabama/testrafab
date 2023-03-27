@@ -1,0 +1,77 @@
+<h3>Drivers order entity</h3>
+
+<br>
+
+<div id="order">
+    <label for="orderid">Id:</label>
+    <input type="text" id="orderid" name="orderid" th:value="${orderid}" size="4" readonly>
+    <br>
+    <label>Completed: <span th:text="${ordercompleted}"></span></label>
+    <br>
+    <label>Truck:  <!--<span th:text="${truckid}"></span> - --><span th:text="${trucknumber}"></span></label>
+</div>
+<br>
+
+<div id="drivers">
+    <h3>Assigned Drivers</h3>
+    <label>Driver 1:  <!-- <span th:text="${driver1id}"></span> - --><span th:text="${driver1name}"></span></label>
+    <br>
+    <label>Driver 2:  <!-- <span th:text="${driver2id}"></span> - --><span th:text="${driver2name}"></span></label>
+    <br>
+    <label>Driver 3:  <!-- <span th:text="${driver3id}"></span> - --><span th:text="${driver3name}"></span></label>
+    <br>
+</div>
+
+<hr>
+
+<div id="cargos">
+    <h3>Cargos</h3>
+
+    <table id="cargoTable">
+        <thead>
+
+            <tr>
+<!--                <th>Num</th>-->
+                <th>Id</th>
+                <th>Name</th>
+                <th>upCity</th>
+                <th>unCity</th>
+                <th>Weight</th>
+                <th>Upload</th>
+                <th>Unload</th>
+
+                <th>Status</th>
+
+                <th>Driver1</th>
+                <th>Driver2</th>
+                <th>Driver3</th>
+
+                <th>Options</th>
+            </tr>
+
+        </thead>
+        <tbody>
+
+            <tr th:each="wayq:${cargoOrderList}">
+<!--                <td th:text="${wayq?.rowsNum}"></td>-->
+                <td th:text="${wayq?.id}"></td>
+                <td th:text="${wayq?.name}"></td>
+                <td th:text="${wayq?.upCityName}"></td>
+                <td th:text="${wayq?.unCityName}"></td>
+                <td th:text="${wayq?.weight}"></td>
+                <td th:text="${wayq?.upload}"></td>
+                <td th:text="${wayq?.unload}"></td>
+
+                <td th:text="${wayq?.status}"></td>
+
+                <td th:text="${wayq?.driver1}"></td>
+                <td th:text="${wayq?.driver2}"></td>
+                <td th:text="${wayq?.driver3}"></td>
+
+                <td><input type="button" value="Select" th:attr="onClick=|loadWaypointDriverExt(${wayq?.wayId});|"/></td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div>

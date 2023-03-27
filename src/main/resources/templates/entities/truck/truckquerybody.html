@@ -1,0 +1,37 @@
+<h3>Truck query body</h3>
+
+<!--Prueba: <span th:text="${prueba}"></span><br>
+Mode: --><span th:hidden="${mode}"></span><br>
+
+<table border="1px">
+    <thead>
+    <tr>
+        <!--<th>Id</th>-->
+        <th>Number</th>
+        <th>Status</th>
+        <th>City</th>
+        <th>Capacity</th>
+        <th>------</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="truckq:${truckList}">
+        <!--<td th:text="${truckq?.id}"></td>-->
+        <td th:text="${truckq?.number}"></td>
+        <td th:text="${truckq?.status}"></td>
+        <td th:text="${truckq?.city}"></td>
+        <td th:text="${truckq?.capacity}"></td>
+
+        <td>
+            <span th:if="${mode == 0}">
+                <button type="button" th:attr="onClick=|loadTruck(${truckq?.id});|">Select</button>
+            </span>
+            <span th:unless="${mode == 0}">
+                <button type="button" th:attr="onClick=|querySelectById(${truckq?.id});|">Select</button>
+            </span>
+        </td>
+
+
+    </tr>
+    </tbody>
+</table>

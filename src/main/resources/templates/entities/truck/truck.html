@@ -1,0 +1,41 @@
+<h3>Truck entity</h3>
+
+<hr><br>
+
+<!--<label for="id">Id:</label>-->
+<input type="hidden" id="id" name="id" th:value="${truck?.id}" size="4" readonly>
+<!--<br><br>-->
+
+<label for="number">Number:</label>
+<input type="text" id="number" name="number" th:value="${truck?.number}">
+<!-- <button type="button" onclick="queryHead('number', 'id', 'id', 'querynumber', '/queries/truck/head/0', 'consultas');">Buscar</button> -->
+<!--<button type="button" onclick="truckNumberSearch();">Buscar</button>-->
+<br><br>
+
+<label for="capacity">Capacity:</label>
+<input type="text" id="capacity" name="capacity" th:value="${truck?.capacity}">
+<br><br>
+
+<label for="status">Status:</label>
+<select id="status" name="status">
+  <option th:each="Opt : ${statusValues}"
+          th:value="${Opt}"
+          th:text="${Opt}"
+          th:selected="${Opt} == ${truck?.status}"></option>
+</select>
+<br><br>
+
+<label for="cityid">City:</label>
+<input type="text" id="cityid" name="cityid" onchange="getTruckCity();" th:value="${cityid}" size="4" readonly>
+<label for="cityname">Name:</label>
+<input type="text" id="cityname" name="cityname" th:value="${cityname}">
+<br><br>
+
+<button type="button" onclick="queryHead('cityname', 'id', 'cityid', 'queryname', '/queries/city/head/1', 'consultas');">Buscar</button>
+<button type="button" onclick="truckCityClear();">Clear</button>
+<button type="button" onclick="truckNumberSearch();">Search</button>
+<input type="button" value="Save" onclick="saveTruck();">
+
+<button type="button" onclick="newTruck();">New truck</button>
+<button type="button" onclick="delTruck();">Delete truck</button>
+

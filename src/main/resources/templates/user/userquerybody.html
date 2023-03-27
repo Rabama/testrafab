@@ -1,0 +1,30 @@
+<!--@thymesVar id="mode" type="java.lang.Integer"-->
+
+<h3>User query body</h3>
+
+Mode: <span th:text="${mode}"></span><br>
+
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="userq:${userList}">
+        <td th:text="${userq?.id}"></td>
+        <td th:text="${userq?.username}"></td>
+
+        <td>
+            <span th:if="${mode == 0}">
+                <button type="button" th:attr="onClick=|adminLoadUserId(${userq?.id});|">Select</button>
+            </span>
+            <span th:unless="${mode == 0}">
+                <button type="button" th:attr="onClick=|querySelectById(${userq?.id});|">Select</button>
+            </span>
+        </td>
+
+    </tr>
+    </tbody>
+</table>

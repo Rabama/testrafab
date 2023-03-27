@@ -1,0 +1,31 @@
+<h3>Order query body</h3>
+
+<!--Prueba: <span th:text="${prueba}"></span><br>
+Mode:--> <span th:hidden="${mode}"></span><br>
+
+<table border="1px">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Completed</th>
+        <th>------</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="orderq:${orderList}">
+        <td th:text="${orderq?.id}"></td>
+        <td th:text="${orderq?.completed}"></td>
+
+        <td>
+            <span th:if="${mode == 0}">
+                <button type="button" th:attr="onClick=|loadOrder(${orderq?.id});|">Select</button>
+            </span>
+            <span th:unless="${mode == 0}">
+                <button type="button" th:attr="onClick=|querySelectById(${orderq?.id});|">Select</button>
+            </span>
+        </td>
+
+
+    </tr>
+    </tbody>
+</table>

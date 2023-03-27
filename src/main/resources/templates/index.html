@@ -9,14 +9,30 @@
     <title>Title</title>
 
     <link rel="stylesheet" type="text/css" href="/css/base.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css">
+
+
 
     <script src="/js/base.js"></script>
+    <script src="/js/admin.js"></script>
+    <script src="/js/employee.js"></script>
     <script src="/js/cityQueries.js"></script>
     <script src="/js/truckQueries.js"></script>
     <script src="/js/cargoQueries.js"></script>
     <script src="/js/distanceQueries.js"></script>
     <script src="/js/driverQueries.js"></script>
+    <script src="/js/driverextQueries.js"></script>
     <script src="/js/orderQueries.js"></script>
+    <script src="/js/userQueries.js"></script>
+
+    <style>
+        /* Menú vertical */
+        .menu-block .menu-item { width:100%; display:block; padding:8px 16px; text-align:left; border:none; white-space:normal; float:none; outline:0 }
+        /* Enlaces no subrayados */
+        .button { border:none; display:inline-block; padding:8px 16px; vertical-align:middle; overflow:hidden;text-decoration:none;color:inherit;background-color:inherit;text-align:center;cursor:pointer;white-space:nowrap}
+        /* Puntero sobre entrada de menú -> Menú resaltado */
+        .button:hover { color:#000!important; background-color:#fff!important }
+    </style>
 
 </head>
 <body>
@@ -24,38 +40,203 @@
 <div class="contenedor">
 
     <div id="menu" class="menu">
-        Menú principal<br/>
-        <ul class="menu">
 
-            <li><a onclick="loadCity(0);">City</a></li>
+        <div class="container row">
 
-            <li><a onclick="loadTruck(0);">Truck</a></li>
+            <div class="w3-col s8 w3-bar">
+                <span>Logistics</span><br>
+               <!-- <a href="#" class="bar-item button"><i class="fa fa-envelope"></i></a>
+                <a href="#" class="bar-item button"><i class="fa fa-user"></i></a>
+                <a href="#" class="bar-item button"><i class="fa fa-cog"></i></a>-->
+            </div>
+        </div>
+        <hr>
 
-            <li><a onclick="loadCargo(0);">Cargo</a></li>
+        <div class="container">
+            <h5>Main menu</h5>
+        </div>
 
-            <li><a onclick="loadDistance(0);">Distance</a></li>
+        <span id="menuDriver" class="menu" th:if="${AuthDriver == true}">
 
-            <li><a onclick="loadDriver(0);">Driver</a></li>
 
-            <li><a onclick="loadOrder(0);">Order</a></li>
+            <ul class="menu">
+                <a href="#" class="menu-item button padding-16 hide-large dark-grey hover-black" onclick="loadDriverExt();" title="Personal Information"><i class="fas fa-address-card"></i>&nbsp;Personal Information</a></li>
+                <!--<li><a onclick="loadDriverExt();">Driver ext</a></li>-->
+                <br>
+                <a href="#" class="menu-item button padding-16 hide-large dark-grey hover-black" onclick="loadOrderDriverExt();" title="Order"><i class="fas fa-file-alt"></i>&nbsp;Order</a></li>
+                <!--<li><a onclick="loadOrderDriverExt();">Order ext</a></li>-->
+            </ul>
 
-        </ul>
+        </span>
 
+        <span id="menuEmployee" class="menu" th:if="${AuthEmployee == true}">
+
+            <ul class="menu">
+                <a href="#" class="menu-item button padding-16 hide-large dark-grey hover-black" onclick="loadCity(0);" title="Cities"><i class="fas fa-city"></i>&nbsp;Cities</a>
+                <!--<li><a onclick="loadCity(0);">City</a></li>-->
+                <br>
+                <a href="#" class="menu-item button padding-16 hide-large dark-grey hover-black" onclick="loadDriver(0);" title="Drivers"><i class="fas fa-male"></i>&nbsp;Drivers</a></li>
+                <!--<li><a onclick="loadDriver(0);">Driver</a></li>-->
+                <br>
+                <a href="#" class="menu-item button padding-16 hide-large dark-grey hover-black" onclick="loadDistance(0);" title="Distances"><i class="fas fa-ruler-horizontal"></i>&nbsp;Distances</a></li>
+                <!--<li><a onclick="loadDistance(0);">Distance</a></li>-->
+                <br>
+                <a href="#" class="menu-item button padding-16 hide-large dark-grey hover-black" onclick="loadTruck(0);" title="Trucks"><i class="fas fa-truck"></i>&nbsp;Trucks</a></li>
+                <!--<li><a onclick="loadTruck(0);">Truck</a></li>-->
+                <br>
+                <a href="#" class="menu-item button padding-16 hide-large dark-grey hover-black" onclick="loadCargo(0);" title="Cargos"><i class="fas fa-truck-loading"></i>&nbsp;Cargos</a></li>
+                <!--<li><a onclick="loadCargo(0);">Cargo</a></li>-->
+                <br>
+                <a href="#" class="menu-item button padding-16 hide-large dark-grey hover-black" onclick="loadOrder(0);" title="Orders"><i class="fas fa-file-alt"></i>&nbsp;Orders</a></li>
+                <!--<li><a onclick="loadOrder(0);">Order</a></li>-->
+            </ul>
+            <!--<br>-->
+            <ul class="menu">
+                <a href="#" class="menu-item button padding-16 hide-large dark-grey hover-black" onclick="loadActualUser();" title="User"><i class="fas fa-address-card"></i>&nbsp;User</a></li>
+                <!--<li><a onclick="loadActualUser();">User</a></li>-->
+            </ul>
+
+        </span>
+
+        <span id="menuAdmin" class="menu" th:if="${AuthAdmin == true}">
+
+            <ul class="menu">
+                <a href="#" class="menu-item button padding-16 hide-large dark-grey hover-black" onclick="loadCity(0);" title="Cities"><i class="fas fa-city"></i>&nbsp;Cities</a>
+                <!--<li><a onclick="loadCity(0);">City</a></li>-->
+                <br>
+                <a href="#" class="menu-item button padding-16 hide-large dark-grey hover-black" onclick="loadDriver(0);" title="Drivers"><i class="fas fa-male"></i>&nbsp;Drivers</a></li>
+                <!--<li><a onclick="loadDriver(0);">Driver</a></li>-->
+                <br>
+                <a href="#" class="menu-item button padding-16 hide-large dark-grey hover-black" onclick="loadDistance(0);" title="Distances"><i class="fas fa-ruler-horizontal"></i>&nbsp;Distances</a></li>
+                <!--<li><a onclick="loadDistance(0);">Distance</a></li>-->
+                <br>
+                <a href="#" class="menu-item button padding-16 hide-large dark-grey hover-black" onclick="loadTruck(0);" title="Trucks"><i class="fas fa-truck"></i>&nbsp;Trucks</a></li>
+                <!--<li><a onclick="loadTruck(0);">Truck</a></li>-->
+                <br>
+                <a href="#" class="menu-item button padding-16 hide-large dark-grey hover-black" onclick="loadCargo(0);" title="Cargos"><i class="fas fa-truck-loading"></i>&nbsp;Cargos</a></li>
+                <!--<li><a onclick="loadCargo(0);">Cargo</a></li>-->
+                <br>
+                <a href="#" class="menu-item button padding-16 hide-large dark-grey hover-black" onclick="loadOrder(0);" title="Orders"><i class="fas fa-file-alt"></i>&nbsp;Orders</a></li>
+                <!--<li><a onclick="loadOrder(0);">Order</a></li>-->
+            </ul>
+            <!--<br>-->
+            <ul class="menu">
+                <a href="#" class="menu-item button padding-16 hide-large dark-grey hover-black" onclick="adminLoadUser();" title="Users Registration"><i class="fas fa-address-card"></i>&nbsp;Users Registration</a></li>
+                <!--<li><a onclick="adminLoadUser();">User</a></li>
+                <li><a onclick="loadRegister();">Register</a></li>-->
+            </ul>
+
+        </span>
+
+        <a th:href="@{/logout}" class="menu-item button padding-16 hide-large dark-grey hover-black" title="Sign Out"><i class="fas fa-address-card"></i>&nbsp;Sign Out</a>
+<!--
         <form th:action="@{/logout}" method="post">
             <input type="submit" value="Sign Out"/>
         </form>
-
+-->
     </div>
 
     <div id="principal" class="principal">
-        principal
+        <!--principal-->
     </div>
 
     <div id="consultas" class="consultas">
-        consultas
+        <!--consultas-->
     </div>
 
 </div>
 
 </body>
 </html>
+
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logistics</title>
+    <meta charset="UTF-8">
+
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <link rel="stylesheet" type="text/css" href="/css/base.css" />
+
+    <script src="/js/base.js"></script>
+    <script src="/js/admin.js"></script>
+    <script src="/js/employee.js"></script>
+    <script src="/js/cityQueries.js"></script>
+    <script src="/js/truckQueries.js"></script>
+    <script src="/js/cargoQueries.js"></script>
+    <script src="/js/distanceQueries.js"></script>
+    <script src="/js/driverQueries.js"></script>
+    <script src="/js/driverextQueries.js"></script>
+    <script src="/js/orderQueries.js"></script>
+    <script src="/js/userQueries.js"></script>
+
+    <style>
+        /* Menú vertical */
+        .menu-block .menu-item { width:100%; display:block; padding:8px 16px; text-align:left; border:none; white-space:normal; float:none; outline:0 }
+        /* Enlaces no subrayados */
+        .button { border:none; display:inline-block; padding:8px 16px; vertical-align:middle; overflow:hidden;text-decoration:none;color:inherit;background-color:inherit;text-align:center;cursor:pointer;white-space:nowrap}
+        /* Puntero sobre entrada de menú -> Menú resaltado */
+        .button:hover { color:#000!important; background-color:#ccc!important }
+
+    </style>
+
+
+</head>
+
+<body>
+<div class="contenedor">
+
+    <div id="menu" class="menu">
+&lt;!&ndash; Sidebar/menu &ndash;&gt;
+        &lt;!&ndash;<nav class="sidebar w3-collapse white animate-left" style="z-index:3;width:150px;" id="sidebarId"><br>&ndash;&gt;
+
+            <div class="container row">
+                <div class="w3-col s4">
+                    <img src="truck01.png" class="w3-circle w3-margin-right" style="width:46px">
+                </div>
+                <div class="w3-col s8 w3-bar">
+                    <span>Logistics</span><br>
+                    <a href="#" class="bar-item button"><i class="fa fa-envelope"></i></a>
+                    <a href="#" class="bar-item button"><i class="fa fa-user"></i></a>
+                    <a href="#" class="bar-item button"><i class="fa fa-cog"></i></a>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="container">
+                <h5>Dashboard</h5>
+            </div>
+
+            <span id="menuDriver" class="menu" th:if="${AuthDriver == true}">
+                <div class="menu-block">
+                    &lt;!&ndash;<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">&ndash;&gt;
+                    <a href="#" class="menu-item button padding-16 hide-large dark-grey hover-black" onclick="loadDriverExt();" title="Personal Information"><i class="fa fa-remove fa-fw"></i>&nbsp;Personal Information</a>
+                    <a href="#" class="menu-item button padding blue"><i class="fa fa-users fa-fw"></i>&nbsp; Overview</a>
+                    <a href="#" class="menu-item button padding"><i class="fa fa-eye fa-fw"></i>&nbsp; Views</a>
+                    <a href="#" class="menu-item button padding"><i class="fa fa-users fa-fw"></i>&nbsp; Traffic</a>
+                    <a href="#" class="menu-item button padding"><i class="fa fa-bullseye fa-fw"></i>&nbsp; Geo</a>
+                    <a href="#" class="menu-item button padding"><i class="fa fa-diamond fa-fw"></i>&nbsp; Orders</a>
+                    <a href="#" class="menu-item button padding"><i class="fa fa-bell fa-fw"></i>&nbsp; News</a>
+                    <a href="#" class="menu-item button padding"><i class="fa fa-bank fa-fw"></i>&nbsp; General</a>
+                    <a href="#" class="menu-item button padding"><i class="fa fa-history fa-fw"></i>&nbsp; History</a>
+                    <a href="#" class="menu-item button padding"><i class="fa fa-cog fa-fw"></i>&nbsp; Settings</a><br><br>
+                </div>
+                <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+                </form>
+        &lt;!&ndash;</nav>&ndash;&gt;
+    </div>
+</div>
+
+
+
+
+
+</body>
+</html>
+
+-->

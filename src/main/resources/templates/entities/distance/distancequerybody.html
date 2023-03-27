@@ -1,0 +1,30 @@
+<h3>Distance query body</h3>
+
+
+<table border="1px">
+    <thead>
+    <tr>
+        <!--<th>Id</th>-->
+        <th>Distance</th>
+        <th>------</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="distanceq:${distanceList}">
+        <!--<td th:text="${distanceq?.id}"></td>-->
+        <td th:text="${distanceq?.distance}"></td>
+        <td>
+            <span th:if="${mode == 0}">
+                <button type="button" th:attr="onClick=|loadDistance(${distanceq?.id});|">Select</button>
+            </span>
+            <span th:unless="${mode == 0}">
+                <button type="button" th:attr="onClick=|querySelectById(${distanceq?.id});|">Select</button>
+            </span>
+        </td>
+
+
+        <!--        <td><button type="button" th:attr="onClick=|loadTruck(${truckq?.id});|">Select</button></td> -->
+
+    </tr>
+    </tbody>
+</table>

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -142,14 +143,37 @@ public class DistanceController {
     public String findDistance(@RequestBody Map<String,String> bundle, @PathVariable(value = "mode") int mode, Model model) {
         log.debug("findDistance ");
         log.debug("findDistance " + bundle.get("distance"));
+        log.debug("findDistance " + bundle.get("city0id"));
+        log.debug("findDistance " + bundle.get("city1id"));
 
         float distance = 0.0F;
         try { distance = Float.parseFloat(bundle.get("distance")); } catch (Exception ignored) { }
 
-        List<Distance> distanceList = distanceServiceImpl.getLessOrEqualByDistance(distance);
+        City city0 = null;
+        try { city0 = cityServiceImpl.findById(Long.parseLong(bundle.get("city0id"))); } catch (Exception ignored) { }
+        City city1 = null;
+        try { city1 = cityServiceImpl.findById(Long.parseLong(bundle.get("city1id"))); } catch (Exception ignored) { }
+
+        HashMap<String, Object> searchMap = new HashMap<>();
+        if (city0 != null) { searchMap.put("city0",   city0); }
+        if (city1 != null) { searchMap.put("city1",   city1); }
+        if (distance != 0.0f) { searchMap.put("distance",   distance); }
+
+        List<Distance> distanceList = distanceServiceImpl.getMultiple(searchMap);
+
+        List<DistanceQuery> distanceSearchList = new ArrayList<>();
+
+        for (Distance dist: distanceList) {
+            distanceSearchList.add(new DistanceQuery() {{
+                setId(dist.getId().toString());
+                setDistance(String.valueOf(dist.getDistance()));
+                setCity0(dist.getCity0().getName());
+                setCity1(dist.getCity1().getName());
+            }});
+        }
 
         model.addAttribute("mode", mode);
-        model.addAttribute("distanceList", distanceList);
+        model.addAttribute("distanceSearchList", distanceSearchList);
 
         return "entities/distance/distancequerybody";
     }

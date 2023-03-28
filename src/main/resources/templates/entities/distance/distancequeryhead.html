@@ -8,7 +8,15 @@
 
     <label for="querydistance">Distance:</label>
     <input type="text" id="querydistance" name="querydistance">
-
+    <br>
+    <label for="querycity0name">Origin:</label>
+    <input type="hidden" id="querycity0id" name="querycity0id" size="4" readonly>
+    <input type="text" id="querycity0name" name="querycity0name" readonly>
+    <br>
+    <label for="querycity1name">Destiny:</label>
+    <input type="hidden" id="querycity1id" name="querycity1id" size="4" readonly>
+    <input type="text" id="querycity1name" name="querycity1name" readonly>
+    <br>
     <button type="button" id="search" th:attr="onClick=|findDistance(${mode});|">Search</button></td>
 
     <hr>

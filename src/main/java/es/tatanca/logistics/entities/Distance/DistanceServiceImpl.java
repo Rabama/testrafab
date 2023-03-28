@@ -6,21 +6,28 @@ import es.tatanca.logistics.entities.Cargo.CargoRepository;
 import es.tatanca.logistics.entities.Cargo.CargoStatus;
 import es.tatanca.logistics.entities.City.City;
 import es.tatanca.logistics.entities.City.CityServiceImpl;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
 @Transactional(isolation = Isolation.SERIALIZABLE)
 @Slf4j
 public class DistanceServiceImpl implements DistanceService {
+
+    @PersistenceContext
+    private final EntityManager entityManager;
 
 //    @Autowired
     private final DistanceRepository distanceRepo;
@@ -116,6 +123,31 @@ public class DistanceServiceImpl implements DistanceService {
         log.debug("getLessOrEqualByDistance  distance: " + distance);
         return distanceRepo.getLessOrEqualByDistance(distance);
     }
+
+    public List<Distance> getMultiple(HashMap<String, Object> conditions) {
+
+        CriteriaBuilder cb         = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Distance> query = cb.createQuery(Distance.class);
+        Root<Distance> root           = query.from(Distance.class);
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (conditions.size() > 0) {
+            conditions.forEach((field, value) -> {
+                switch (field) {
+                    case "city0" -> predicates.add(cb.equal(root.get(field), (City) value));
+                    case "city1" -> predicates.add(cb.equal(root.get(field), (City) value));
+                    case "distance" -> predicates.add(cb.lessThanOrEqualTo(root.get(field), (Float) value));
+                } // switch
+            });
+
+            query.select(root).where(predicates.toArray(new Predicate[predicates.size()]));
+        } else {
+            query.select(root);
+        }
+
+        return entityManager.createQuery(query).getResultList();
+    } // getMultiple
 
     @Override
     public Float getDistance(City city, City city1) throws RuntimeException {

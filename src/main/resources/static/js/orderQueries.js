@@ -48,8 +48,8 @@ function loadOrder(id) {
             let divMain = document.getElementById("principal");
             divMain.innerHTML = xhr.responseText;
 
-            //
-            weightTotalCalculation();
+            //weightTotalCalculation();
+
 
             orderWeight();
             orderHours();

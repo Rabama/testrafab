@@ -6,13 +6,17 @@
     <tr>
         <!--<th>Id</th>-->
         <th>Distance</th>
+        <th>Origin</th>
+        <th>Destiny</th>
         <th>------</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="distanceq:${distanceList}">
+    <tr th:each="distanceq:${distanceSearchList}">
         <!--<td th:text="${distanceq?.id}"></td>-->
         <td th:text="${distanceq?.distance}"></td>
+        <td th:text="${distanceq?.city0}"></td>
+        <td th:text="${distanceq?.city1}"></td>
         <td>
             <span th:if="${mode == 0}">
                 <button type="button" th:attr="onClick=|loadDistance(${distanceq?.id});|">Select</button>

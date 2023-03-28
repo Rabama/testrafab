@@ -51,6 +51,11 @@ function distanceSearchOK(response) {
     document.getElementById('destinoId').value = 'id';
 
     document.getElementById('querydistance').value  = document.getElementById('distance').value;
+    document.getElementById('querycity0id').value  = document.getElementById('city0').value;
+    document.getElementById('querycity0name').value  = document.getElementById('cityname0').value;
+    document.getElementById('querycity1id').value  = document.getElementById('city1').value;
+    document.getElementById('querycity1name').value  = document.getElementById('cityname1').value;
+
 }
 function distanceSearchERROR(number) {
     alert("orderSearchERROR. ERROR "+ number);
@@ -60,8 +65,10 @@ function distanceSearchERROR(number) {
 function findDistance(mode) {
 
     let  distance  = document.getElementById("querydistance").value;
+    let city0id = document.getElementById("querycity0id").value;
+    let city1id = document.getElementById("querycity1id").value;
 
-    let data = JSON.stringify( {"distance": distance} );
+    let data = JSON.stringify( {"distance": distance, "city0id": city0id, "city1id": city1id} );
 
     xhRequest2(true, "/entities/distance/find/"+mode, findDistanceOK, findDistanceERROR, data);
 

@@ -1,5 +1,11 @@
 package es.tatanca.logistics.entities.Distance;
 
+import lombok.Data;
+
+@Data
 public class DistanceQuery {
-    public float distance;
+    String id;
+    String distance;
+    String city0;
+    String city1;
 }

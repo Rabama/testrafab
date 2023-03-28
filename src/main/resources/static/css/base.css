@@ -75,3 +75,14 @@ div.consultas {
         margin-left: 30px;
     }
 }
+#cargoTable td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+#cargoTable tr > *:nth-child(3) {
+    display: none;
+}
+#cargoTable tr > *:nth-child(4) {
+    display: none;
+}

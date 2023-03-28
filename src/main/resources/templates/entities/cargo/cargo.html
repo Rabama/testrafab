@@ -1,67 +1,5 @@
 <h3>Cargo entity</h3>
 
-<<<<<<< HEAD
-<br><br>
-
-<form action="/savecargo" method="POST">
-
-  <label for="id">Id:</label>
-  <input type="text" id="id" name="id" th:value="${cargo?.id}">
-  <br><br>
-
-  <label for="name">Name:</label>
-  <input type="text" id="name" name="name" th:value="${cargo?.name}">
-  <button type="button" onclick="queryHead('name', 'id', 'id', 'queryname', '/cargo/query/head/0', 'consultas');">Search</button>
-  <br><br>
-
-  <label for="weight">Weight:</label>
-  <input type="text" id="weight" name="weight" th:value="${cargo?.weight}">
-  <br><br>
-
-  <!--
-      <label for="status">Status:</label>
-      <select id="status" name="status" size="1">
-          <option value="READY" selected>Ready</option>
-          <option value="ASSIGNED">Assigned</option>
-          <option value="SHIPPED">Shipped</option>
-          <option value="ENTREGADO">Entregado</option>
-      </select>
-      <br><br>
-  -->
-  <label for="status">Status:</label>
-  <select id="status" name="status">
-    <option th:each="Opt : ${statusValues}"
-            th:value="${Opt}"
-            th:text="${Opt}"
-            th:selected="${Opt} == ${cargo?.status}"></option>
-  </select>
-  <br><br>
-
-
-  <label for="upcity">City:</label>
-  <input type="text" id="upcity" name="upcity" onchange="getCargoUpCity();" th:value="${upcity}" >
-  <label for="upcityname">Upload city:</label>
-  <input type="text" id="upcityname" name="upcityname" th:value="${upcityname}">
-  <button type="button" onclick="queryHead('upcityname', 'id', 'upcity', 'queryname', '/city/query/head/1', 'consultas');">Buscar</button>
-  <br><br>
-
-  <label for="uncity">City:</label>
-  <input type="text" id="uncity" name="uncity" onchange="getCargoUnCity();" th:value="${uncity}" >
-  <label for="uncityname">Unload city:</label>
-  <input type="text" id="uncityname" name="uncityname" th:value="${uncityname}">
-  <button type="button" onclick="queryHead('uncityname', 'id', 'uncity', 'queryname', '/city/query/head/1', 'consultas');">Buscar</button>
-  <br><br>
-
-
-  <input type="button" value="Save" onclick="saveCargo();">
-
-</form>
-
-<br><br>
-
-<button type="button" onclick="newT01();">New</button>
-<button type="button" onclick="delT01();">Delete</button>
-=======
 <hr><br>
 
 <!--@thymesVar id="cargo" type=".entities.Cargo.Cargo"-->
@@ -92,19 +30,19 @@
 <br><br>
 
 
-<label for="upcity">City:</label>
-<input type="text" id="upcity" name="upcity" onchange="getCargoUpCity();" th:value="${upcity}" size="4" readonly>
+<!--<label for="upcity">City:</label>-->
+<input type="hidden" id="upcity" name="upcity" onchange="getCargoUpCity();" th:value="${upcity}" size="4" readonly>
 <label for="upcityname">Upload city:</label>
 <input type="text" id="upcityname" name="upcityname" th:value="${upcityname}">
-<button type="button" onclick="queryHead('upcityname', 'id', 'upcity', 'queryname', '/queries/city/head/1', 'consultas');">Buscar</button>
+<button type="button" onclick="queryHead('upcityname', 'id', 'upcity', 'queryname', '/queries/city/head/1', 'consultas');">Search</button>
 <button type="button" onclick="cargoUpCityClear();">Clear</button>
 <br><br>
 
-<label for="uncity">City:</label>
-<input type="text" id="uncity" name="uncity" onchange="getCargoUnCity();" th:value="${uncity}" size="4" readonly>
+<!--<label for="uncity">City:</label>-->
+<input type="hidden" id="uncity" name="uncity" onchange="getCargoUnCity();" th:value="${uncity}" size="4" readonly>
 <label for="uncityname">Unload city:</label>
 <input type="text" id="uncityname" name="uncityname" th:value="${uncityname}">
-<button type="button" onclick="queryHead('uncityname', 'id', 'uncity', 'queryname', '/queries/city/head/1', 'consultas');">Buscar</button>
+<button type="button" onclick="queryHead('uncityname', 'id', 'uncity', 'queryname', '/queries/city/head/1', 'consultas');">Search</button>
 <button type="button" onclick="cargoUnCityClear();">Clear</button>
 <br><br>
 
@@ -164,4 +102,3 @@
 <label for="hours">Hours:</label>
 <input type="text" id="hours" name="hours" th:value="${hoursUn}" maxlength="4" size="4" readonly>
 <br><br>-->
->>>>>>> origin/master

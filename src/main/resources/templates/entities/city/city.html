@@ -1,33 +1,18 @@
 <h3>City entity</h3>
 
+<hr><br>
+
+<!--<label for="id">Id:</label>-->
+<input type="hidden" id="id" name="id" th:value="${city?.id}" size="4" readonly>
+<!--<br><br>-->
+
+<label for="name">Name:</label>
+<input type="text" id="name" name="name" th:value="${city?.name}">
+<!--<button type="button" onclick="queryHead('name', 'id', 'id', 'queryname', '/queries/city/head/0', 'consultas');">Buscar</button>-->
 <br><br>
 
-<form action="#" method="POST">
+<button type="button" onclick="queryHead('name', 'id', 'id', 'queryname', '/queries/city/head/0', 'consultas');">Search</button>
+<input type="button" value="Save" onclick="saveCity();">
 
-  <label for="id">Id:</label>
-  <input type="text" id="id" name="id" th:value="${city?.id}">
-  <!--    <button type="button" id="select" onclick="getEntity('city','id')">Select</button> -->
-  <br><br>
-
-  <label for="name">Name:</label>
-  <input type="text" id="name" name="name" th:value="${city?.name}">
-  <button type="button" onclick="queryHead('name', 'id', 'id', 'queryname', '/city/query/head/0', 'consultas');">Buscar</button>
-  <!-- queryHead en city-queries.js -->
-  <br><br>
-
-  <!--
-      <label for="number">Truck:</label>
-      <input type="text" id="truck" name="truck" th:value="${city?.truck.id}" >
-      <input type="text" id="number" name="number" th:value="${city?.number}">
-      <button type="button" th:attr="onclick=|httpSimpleRequest('/queries/like/city', 'number', 'consultas');|">Buscar</button>
-      <br><br>
-  -->
-
-  <input type="button" value="Save" onclick="saveCity();">
-
-</form>
-
-<br><br>
-
-<button type="button" onclick="newT01();">New</button>
-<button type="button" onclick="delT01();">Delete</button>
+<button type="button" onclick="newCity();">New</button>
+<button type="button" onclick="delCity();">Delete</button>

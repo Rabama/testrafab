@@ -1,22 +1,24 @@
 <h3>Driver query body</h3>
 
-Prueba: <span th:text="${prueba}"></span><br>
-Mode: <span th:text="${mode}"></span><br>
+<!--Prueba: <span th:text="${prueba}"></span><br>
+Mode:--> <span th:hidden="${mode}"></span><br>
 
-<table>
+<table border="1px">
     <thead>
     <tr>
-        <th>Id</th>
+        <!--<th>Id</th>-->
         <th>Name</th>
         <th>Status</th>
+        <th>City</th>
         <th>------</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="driverq:${driverList}">
-        <td th:text="${driverq?.id}"></td>
+        <!--<td th:text="${driverq?.id}"></td>-->
         <td th:text="${driverq?.name}"></td>
         <td th:text="${driverq?.status}"></td>
+        <td th:text="${driverq?.city}"></td>
 
         <td>
             <span th:if="${mode == 0}">

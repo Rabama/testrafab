@@ -6,16 +6,10 @@
     <div id="origenFd"></div>
     <div id="destinoId"></div>
 
-    <label for="querynumber">Number:</label>
-    <input type="text" id="querynumber" name="querynumber">
+    <label for="querydistance">Distance:</label>
+    <input type="text" id="querydistance" name="querydistance">
 
-    <label for="querystatus">Status:</label>
-    <select id="querystatus" name="querystatus" size="1">
-        <option value="0" selected>OK</option>
-        <option value="1">NOK</option>
-    </select>
-
-    <button type="button" id="search" th:attr="onClick=|findTruck(${mode});|">Search</button></td>
+    <button type="button" id="search" th:attr="onClick=|findDistance(${mode});|">Search</button></td>
 
     <hr>
 

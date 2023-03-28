@@ -1,18 +1,18 @@
 <h3>City query body</h3>
 
-Prueba: <span th:text="${prueba}"></span><br>
-Mode: <span th:text="${mode}"></span><br>
+<!--Prueba: <span th:hidden="${prueba}"></span><br>-->
+<!--Mode: --><span th:hidden="${mode}"></span><br>
 
-<table>
+<table border="1px">
     <thead>
     <tr>
-        <th>Id</th>
+        <!--<th>Id</th>-->
         <th>Name</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="cityq:${cityList}">
-        <td th:text="${cityq?.id}"></td>
+        <!--<td th:text="${cityq?.id}"></td>-->
         <td th:text="${cityq?.name}"></td>
 
         <td>
@@ -23,10 +23,7 @@ Mode: <span th:text="${mode}"></span><br>
                 <button type="button" th:attr="onClick=|querySelectById(${cityq?.id});|">Select</button>
             </span>
         </td>
-        <!--
-                <td><button type="button" th:attr="onClick=|querySelectById(${cityq?.id});|">Select option 1</button></td>
-                <td><button type="button" th:attr="onClick=|loadCity(${cityq?.id});|">Select option 2</button></td>
-        -->
+
     </tr>
     </tbody>
 </table>

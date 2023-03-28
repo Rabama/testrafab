@@ -1,35 +1,38 @@
 <h3>Cargo query body</h3>
 
-Prueba: <span th:text="${prueba}"></span><br>
-Mode: <span th:text="${mode}"></span><br>
+<!--Mode:--> <span th:hidden="${mode}"></span><br>
 
-<table>
-  <thead>
-  <tr>
-    <th>Id</th>
-    <th>Number</th>
-    <th>Status</th>
-    <th>------</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="cargoq:${cargoList}">
-    <td th:text="${cargoq?.id}"></td>
-    <td th:text="${cargoq?.name}"></td>
-    <td th:text="${cargoq?.status}"></td>
+<table border="1px">
+    <thead>
+    <tr>
+        <th>Status</th>
+        <!--<th>Id</th>-->
+        <th>Name</th>
+        <th>Upcity</th>
+        <th>Uncity</th>
+        <th>Weight</th>
 
-    <!--        <td><button type="button" th:attr="onClick=|loadCargo(${cargoq?.id});|">Select</button></td> -->
+        <th>------</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cargoq:${cargoSearchList}">
+        <td th:text="${cargoq?.status}"></td>
+        <!--<td th:text="${cargoq?.id}"></td>-->
+        <td th:text="${cargoq?.name}"></td>
+        <td th:text="${cargoq?.upCity}"></td>
+        <td th:text="${cargoq?.unCity}"></td>
+        <td th:text="${cargoq?.weight}"></td>
 
-    <td>
+        <td>
             <span th:if="${mode == 0}">
                 <button type="button" th:attr="onClick=|loadCargo(${cargoq?.id});|">Select</button>
             </span>
-      <span th:unless="${mode == 0}">
+            <span th:unless="${mode == 0}">
                 <button type="button" th:attr="onClick=|querySelectById(${cargoq?.id});|">Select</button>
             </span>
-    </td>
+        </td>
 
-
-  </tr>
-  </tbody>
+    </tr>
+    </tbody>
 </table>

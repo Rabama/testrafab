@@ -2,6 +2,8 @@
 
   <h3>Order query head</h3>
 
+  <!--Mode: --><span th:hidden="${mode}"></span><br>
+
   <div id="valor"></div>
   <div id="origenFd"></div>
   <div id="destinoId"></div>
@@ -10,9 +12,11 @@
   <input type="text" id="queryid" name="queryid">
 
   <label for="querycompleted">Completed:</label>
-  <select id="querycompleted" name="querycompleted" size="1">
-    <option value="0" selected>NO</option>
-    <option value="1">YES</option>
+  <select id="querycompleted" name="querycompleted">
+    <option th:each="compOpt : ${completedValues}"
+            th:value="${compOpt}"
+            th:text="${compOpt}"
+            th:selected="${compOpt} == ${order?.completed}"></option>
   </select>
 
   <button type="button" id="search" th:attr="onClick=|findOrder(${mode});|">Search</button>

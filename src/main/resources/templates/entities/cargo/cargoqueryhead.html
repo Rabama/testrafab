@@ -1,21 +1,37 @@
 <div id="queryHead">
 
+  <!--@thymesVar id="mode" type="java.lang.Integer"-->
+
   <h3>Cargo query head</h3>
 
   <div id="valor"></div>
   <div id="origenFd"></div>
   <div id="destinoId"></div>
 
+  <!--Mode:--> <span th:hidden="${mode}"></span>
+  <br>
   <label for="queryname">Name:</label>
   <input type="text" id="queryname" name="queryname">
 
   <label for="querystatus">Status:</label>
-  <select id="querystatus" name="querystatus" size="1">
-    <option value="0" selected>Ready</option>
-    <option value="1">Assigned</option>
-    <option value="2">Shipped</option>
-    <option value="3">Entregado</option>
+  <select id="querystatus" name="querystatus">
+    <option th:each="Opt : ${statusValues}"
+            th:value="${Opt}"
+            th:text="${Opt}"></option>
   </select>
+  <br>
+
+  <label for="queryupcityname">upCity:</label>
+  <input type="hidden" id="queryupcityid" name="queryupcityid" size="4" readonly>
+  <input type="text" id="queryupcityname" name="queryupcityname" readonly>
+  <br>
+  <label for="queryuncityname">unCity:</label>
+  <input type="hidden" id="queryuncityid" name="queryuncityid" size="4" readonly>
+  <input type="text" id="queryuncityname" name="queryuncityname" readonly>
+  <br>
+  <label for="queryweight">Max weight:</label>
+  <input type="text" id="queryweight" name="queryupcityid" size="6">
+  <br>
 
   <button type="button" id="search" th:attr="onClick=|findCargo(${mode});|">Search</button>
 

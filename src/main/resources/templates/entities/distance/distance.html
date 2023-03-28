@@ -1,37 +1,39 @@
 <h3>Distance entity</h3>
 
+<hr><br>
+
+<!--<label for="id">Id:</label>-->
+<input type="hidden" id="id" name="id" th:value="${distance?.id}" size="4" readonly>
+<!--<br><br>-->
+
+<label for="distance">Distance:</label>
+<input type="text" id="distance" name="distance" th:value="${distance?.distance}">
+<!--<button type="button" onclick="queryHead('distance', 'id', 'id', 'querydistance', '/queries/distance/head/0', 'consultas');">Buscar</button>-->
 <br><br>
-
-  <label for="id">Id:</label>
-  <input type="text" id="id" name="id" th:value="${distance?.id}">
-  <button type="button" th:attr="onclick=|httpRequest('/queries', true, 'distance', 'id', 'consultas');|">Buscar</button>
-  <br><br>
-
-  <label for="distance">Distance:</label>
-  <input type="text" id="distance" name="distance" th:value="${distance?.distance}">
-  <button type="button" th:attr="onclick=|httpRequest('/queries', true, 'distance', 'distance', 'consultas');|">Buscar</button>
-  <br><br>
-
+<!--
   <label for="time">Estimated time:</label>
   <input type="text" id="time" name="time" th:value="${distance?.time}">
   <button type="button" th:attr="onclick=|httpRequest('/queries', true, 'distance', 'time', 'consultas');|">Buscar</button>
   <br><br>
+-->
+<!--<label for="city0">City0:</label>-->
+<input type="hidden" id="city0" name="city0"  onchange="getDistanceCity0();" th:value="${distance?.city0?.id}">
+<label for="cityname0">First city:</label>
+<input type="text" id="cityname0" name="cityname0" th:value="${distance?.city0?.name}">
+<button type="button" onclick="queryHead('cityname0', 'id', 'city0', 'queryname', '/queries/city/head/1', 'consultas');">Search</button>
+<button type="button" onclick="distanceCity0Clear();">Clear</button>
+<br><br>
 
-  <label for="city0">City0:</label>
-  <input type="text" id="city0" name="city0"  onchange="getDistanceCity();" th:value="${distance?.city0}">
-  <label for="cityname0">Name:</label>
-  <input type="text" id="cityname0" name="cityname0" th:value="${cityname}">
-  <button type="button" onclick="queryHead('cityname0', 'id', 'cityid', 'queryname', '/city/query/head/1', 'consultas');">Buscar</button>
-  <br><br>
+<!--<label for="city1">City1:</label>-->
+<input type="hidden" id="city1" name="city1"  onchange="getDistanceCity1();" th:value="${distance?.city1?.id}">
+<label for="cityname1">Second city:</label>
+<input type="text" id="cityname1" name="cityname1" th:value="${distance?.city1?.name}">
+<button type="button" onclick="queryHead('cityname1', 'id', 'city1', 'queryname', '/queries/city/head/1', 'consultas');">Search</button>
+<button type="button" onclick="distanceCity1Clear();">Clear</button>
+<br><br>
 
-  <label for="city1">City1:</label>
-  <input type="text" id="city1" name="city1"  onchange="getDistanceCity1();" th:value="${distance?.city1}">
-  <label for="cityname1">Name:</label>
-  <input type="text" id="cityname1" name="cityname1" th:value="${cityname1}">
-  <button type="button" onclick="queryHead('cityname1', 'id', 'cityid', 'queryname', '/city/query/head/1', 'consultas');">Buscar</button>
-  <br><br>
+<button type="button" onclick="distanceSearch();">Search</button>
+<input type="button" value="Save" onclick = "saveDistance();">
 
-  <input type="button" value="Save" onclick = "saveDistance();">
-
-<button type="button" onclick="newDistance();">New distance</button>
-<button type="button" onclick="delDistance();">Delete distance</button>
+<button type="button" onclick="newDistance();">New</button>
+<button type="button" onclick="delDistance();">Delete</button>

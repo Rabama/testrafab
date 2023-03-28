@@ -1,17 +1,19 @@
 <div id="queryHead">
 
+  <!--@thymesVar id="mode" type="java.lang.Integer"-->
+
   <h3>City query head</h3>
 
   <div id="valor"></div>
   <div id="origenFd"></div>
   <div id="destinoId"></div>
 
-  Mode: <h3 th:text="${mode}"></h3>
+  <!--Mode: <span th:text="${mode}"></span>-->
 
   <label for="queryname">Name:</label>
   <input type="text" id="queryname" name="queryname">
-  <!--    <button type="button" id="search" onclick="findCity();">Search</button> -->
-  <button type="button" id="search" th:attr="onClick=|findCity(${mode});|">Search</button></td>
+
+  <button type="button" id="search" th:attr="onClick=|findCity(${mode});|">Search</button>
 
   <hr>
 

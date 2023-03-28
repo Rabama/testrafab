@@ -1,42 +1,50 @@
 <h3>Driver entity</h3>
 
+<hr><br>
+
+<!--<label for="id">Id:</label>-->
+<input type="hidden" id="id" name="id" th:value="${driver?.id}">
+<!--<br><br>-->
+
+<label for="name">Name:</label>
+<input type="text" id="name" name="name" th:value="${driver?.name}">
+<!-- <button type="button" onclick="queryHead('name', 'id', 'id', 'queryname', '/queries/driver/head/0', 'consultas');">Buscar</button> -->
+<!--<button type="button" onclick="driverNameSearch();">Buscar</button>-->
 <br><br>
 
-<form action="#" method="POST">
-
-  <label for="id">Id:</label>
-  <input type="text" id="id" name="id" th:value="${driver?.id}">
-  <br><br>
-
-  <label for="name">Namer:</label>
-  <input type="text" id="name" name="name" th:value="${driver?.name}">
-  <button type="button" onclick="queryHead('name', 'id', 'id', 'queryname', '/driver/query/head/0', 'consultas');">Buscar</button>
-  <br><br>
-
-  <label for="surname">Surname:</label>
-  <input type="text" id="surname" name="surname" th:value="${driver?.surname}">
-  <button type="button" onclick="queryHead('surname', 'id', 'id', 'querysurname', '/driver/query/head/0', 'consultas');">Buscar</button>
-  <br><br>
-
-  <label for="workedhours">Capacity:</label>
-  <input type="text" id="workedhours" name="workedhours" th:value="${driver?.workedhours}">
-  <br><br>
-
-  <label for="status">Status:</label>
-  <select id="status" name="status" size="1">
-    <option th:value="WORK" th:text="WORK" selected></option>
-    <option th:value="REST" th:text="REST"></option>
-  </select>
-  <br><br>
-
-  <br><br>
-
-  <input type="button" value="Save" onclick="saveDriver();">
-
-</form>
-
+<label for="surname">Surname:</label>
+<input type="text" id="surname" name="surname" th:value="${driver?.surname}">
+<!--<button type="button" onclick="queryHead('surname', 'id', 'id', 'querysurname', '/queries/driver/head/0', 'consultas');">Buscar</button>-->
 <br><br>
 
-<button type="button" onclick="newDriver();">New truck</button>
-<button type="button" onclick="delDriver();">Delete truck</button>
+<label for="username">Username:</label>
+<input type="text" id="username" name="username" th:value="${driver?.username}">
+<br><br>
+
+<label for="workedhours">Worked hours:</label>
+<input type="text" id="workedhours" name="workedhours" th:value="${driver?.workedHours}">
+<br><br>
+
+<label for="status">Status:</label>
+<select id="status" name="status">
+  <option th:each="Opt : ${statusValues}"
+          th:value="${Opt}"
+          th:text="${Opt}"
+          th:selected="${Opt} == ${driver?.status}"></option>
+</select>
+<br><br>
+
+
+<label for="cityid">City:</label>
+<input type="hidden" id="cityid" name="cityid" onchange="getDriverCity();" th:value="${cityid}" >
+<input type="text" id="cityname" name="cityname" th:value="${cityname}">
+<button type="button" onclick="queryHead('cityname', 'id', 'cityid', 'queryname', '/queries/city/head/1', 'consultas');">Search</button>
+<button type="button" onclick="driverCityClear();">Clear</button>
+<br><br>
+
+<button type="button" onclick="driverNameSearch();">Search</button>
+<input type="button" value="Save" onclick="saveDriver();">
+
+<button type="button" onclick="newDriver();">New</button>
+<button type="button" onclick="delDriver();">Delete</button>
 

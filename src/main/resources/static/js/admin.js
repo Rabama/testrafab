@@ -62,12 +62,14 @@ function adminSaveUser() {
     let employee = document.getElementById("employee").checked;
     let driver   = document.getElementById("driver").checked;
 
+/*
     alert("id      : " + id         +
         "\nusername: " + username   +
         "\npassword: " + password +
         "\nadmin   : " + admin    +
         "\nemployee: " + employee +
         "\ndriver  : " + driver);
+*/
 
     let dataJson = { "id": id, "username": username, "password": password, "admin": admin, "employee": employee, "driver": driver };
 

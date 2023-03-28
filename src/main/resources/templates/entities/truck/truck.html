@@ -27,7 +27,7 @@
 
 <!--<label for="cityid">City:</label>-->
 <input type="hidden" id="cityid" name="cityid" onchange="getTruckCity();" th:value="${cityid}" size="4" readonly>
-<label for="cityname">Name:</label>
+<label for="cityname">City:</label>
 <input type="text" id="cityname" name="cityname" th:value="${cityname}">
 
 <button type="button" onclick="queryHead('cityname', 'id', 'cityid', 'queryname', '/queries/city/head/1', 'consultas');">Search</button>

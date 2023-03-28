@@ -66,7 +66,7 @@ public class DistanceServiceImpl implements DistanceService {
         }
 
         // Checking distance is not already created.
-        if (getDistance(distance.getCity0(), distance.getCity1()) != 0.0F) {
+        if (getDistance(distance.getCity0(), distance.getCity1()) != null) {
             throw new RuntimeException("That distance is already created.");
         }
 
@@ -163,8 +163,12 @@ public class DistanceServiceImpl implements DistanceService {
                 throw new RuntimeException("Error: No distance");
             }
         }
-        log.debug("getDistance: " + distance.getDistance());
-        return distance.getDistance();
+        if (distance != null) {
+            log.debug("getDistance: " + distance.getDistance());
+            return distance.getDistance();
+        } else {
+            return null;
+        }
     }
 
     // *****************************************************************************************************************

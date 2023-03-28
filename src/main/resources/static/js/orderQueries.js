@@ -11,6 +11,7 @@ const otWeight     =  8;
 const otTotal      =  9;
 const otHours      = 10;
 const otStatus     = 11;
+const otOptions    = 12;
 
 // *********************************************************************************************************************
 // Desde order
@@ -97,13 +98,16 @@ function saveOrder() {
     let driver2Id = document.getElementById("driver2id").value;
     let driver3Id = document.getElementById("driver3id").value;
 
+    // Hours
+    let hours     = document.getElementById("hours").value;
+
     //  Cargos
     let table    = document.getElementById("cargoTable");
     let rowsNum  = table.rows.length;
 
     // Text field.
     let baseJson = {"id": id, "completed": completed, "truckId": truckId, "rowsNum": rowsNum,
-        "driver1Id": driver1Id, "driver2Id": driver2Id, "driver3Id": driver3Id };
+        "driver1Id": driver1Id, "driver2Id": driver2Id, "driver3Id": driver3Id, "hours": hours };
 
     // Numeric field.
     let cargoArray = [];
@@ -228,9 +232,9 @@ function orderCargoNewRow(bundle, upload) {
     table.rows[rowsNum].cells[otStatus].innerHTML     = data.status;
 
     asd.innerHTML =
-        "<input type=\"button\" value=\"Subir\"  onclick=\"orderCargoRowUp("+rowsNum+");\"/>"+
-        "<input type=\"button\" value=\"Bajar\"  onclick=\"orderCargoRowDown("+rowsNum+");\"/>"+
-        "<input type=\"button\" value=\"Borrar\" onclick=\"orderCargoRowDelete("+rowsNum+");\"/>";
+        "<input type=\"button\" value=\"Up\"  onclick=\"orderCargoRowUp("+rowsNum+");\"/>"+
+        "<input type=\"button\" value=\"Down\"  onclick=\"orderCargoRowDown("+rowsNum+");\"/>"+
+        "<input type=\"button\" value=\"Delete\" onclick=\"orderCargoRowDelete("+rowsNum+");\"/>";
 }
 
 // *********************************************************************************************************************
@@ -526,7 +530,7 @@ function orderCargoRowDelete(target) {
 
 } // orderCargoRowDelete
 function orderCargoRowDeleteOK(response) {
-    alert("orderCargoRowDeleteOK: " + response);
+//    alert("orderCargoRowDeleteOK: " + response);
 
     let table = document.getElementById("cargoTable");
     let cells = table.rows[0].cells;

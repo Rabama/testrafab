@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 @AllArgsConstructor
@@ -160,6 +161,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional(isolation = Isolation.SERIALIZABLE)
     public Long saveOrder(Order order, Truck truck, Driver driver1, Driver driver2, Driver driver3, List<Waypoint> waypointList) {
 
+        AtomicReference<Double> weight = new AtomicReference<>(0D);
 
         if (order.getId() != null) {
             Optional<Order> opt = orderRepo.findById(order.getId());
@@ -268,6 +270,14 @@ public class OrderServiceImpl implements OrderService {
                 if (cargo.getStatus() == CargoStatus.READY) {
                     cargo.setStatus(CargoStatus.ASSIGNED);
                 }
+                if (w.isUpload() == Boolean.TRUE) {
+                    weight.updateAndGet(v -> v + cargo.getWeight());
+                    if (weight.get() > truck.getCapacity()) {
+                        throw new RuntimeException("Error: Weight exceeds truck's capacity.");
+                    }
+                } else {
+                    weight.updateAndGet(v -> v - cargo.getWeight());
+                }
                 cargoServiceImpl.saveCargo(cargo);
             });
 
@@ -303,6 +313,8 @@ public class OrderServiceImpl implements OrderService {
                 Cargo cargo = w.getCargo();
                 if ((cargo.getStatus() != CargoStatus.READY) && (cargo.getStatus() != CargoStatus.ASSIGNED)) {
                     throw new RuntimeException("Error: You can't delete an order that has started.");
+                } else {
+                    cargo.setStatus(CargoStatus.READY);
                 }
                 waypointRepo.delete(w);
             });

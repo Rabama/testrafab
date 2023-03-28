@@ -41,6 +41,8 @@ public class OrderController {
 
     private final WaypointRepository waypointRepo;
 
+
+
     // *****************************************************************************************************************
     @GetMapping("/entities/order")
     public String getOrderPage(Model model) {
@@ -172,6 +174,7 @@ public class OrderController {
         String driver2IdStr = reqParam.get("driver2Id");
         String driver3IdStr = reqParam.get("driver3Id");
         String rowsNumStr = reqParam.get("rowsNum");
+        String hoursStr = reqParam.get("hours");
 
         log.debug("OrderControllar.saveOrder");
         log.debug("Id        : " + orderIdStr);
@@ -181,6 +184,7 @@ public class OrderController {
         log.debug("Driver2Id : " + driver2IdStr);
         log.debug("Driver3Id : " + driver3IdStr);
         log.debug("RowsNum   : " + rowsNumStr);
+        log.debug("Hours     : " + hoursStr);
 
 
         Order order;
@@ -228,6 +232,13 @@ public class OrderController {
             order.setTruck(truck);
         }
 
+        Double hours = 0D;
+        try {
+            hours = Double.parseDouble(hoursStr);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Hours has an invalid value.", HttpStatus.BAD_REQUEST);
+        }
+
         if (!driver1IdStr.equals("")) {
 
             long driver1Id;
@@ -238,8 +249,16 @@ public class OrderController {
             }
 
             driver1 = driverServiceImpl.findById(driver1Id);
-            if (truck == null) {
+            if (driver1 == null) {
                 return new ResponseEntity<>("Can't find driver " + driver1IdStr + ".", HttpStatus.BAD_REQUEST);
+            }
+
+            if (driver1.getCity() != truck.getCity()) {
+                return new ResponseEntity<>("First driver is in a different city than the truck.", HttpStatus.BAD_REQUEST);
+            }
+
+            if (driver1.getWorkedHours() + hours > 176) {
+                return new ResponseEntity<>("First driver is estimated to work more time than the limit.", HttpStatus.BAD_REQUEST);
             }
 
         }
@@ -254,8 +273,16 @@ public class OrderController {
             }
 
             driver2 = driverServiceImpl.findById(driver2Id);
-            if (truck == null) {
+            if (driver2 == null) {
                 return new ResponseEntity<>("Can't find driver " + driver2IdStr + ".", HttpStatus.BAD_REQUEST);
+            }
+
+            if (driver2.getCity() != truck.getCity()) {
+                return new ResponseEntity<>("Second driver is in a different city than the truck.", HttpStatus.BAD_REQUEST);
+            }
+
+            if (driver2.getWorkedHours() + hours > 176) {
+                return new ResponseEntity<>("Second driver is estimated to work more time than the limit.", HttpStatus.BAD_REQUEST);
             }
 
         }
@@ -270,8 +297,17 @@ public class OrderController {
             }
 
             driver3 = driverServiceImpl.findById(driver3Id);
-            if (truck == null) {
+            if (driver3 == null) {
                 return new ResponseEntity<>("Can't find driver " + driver3IdStr + ".", HttpStatus.BAD_REQUEST);
+            }
+
+            if (driver3.getCity() != truck.getCity()) {
+                return new ResponseEntity<>("Load worker is in a different city than the truck.", HttpStatus.BAD_REQUEST);
+            }
+
+
+            if (driver3.getWorkedHours() + hours > 176) {
+                return new ResponseEntity<>("Load worker is estimated to work more time than the limit.", HttpStatus.BAD_REQUEST);
             }
 
         }

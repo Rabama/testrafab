@@ -184,9 +184,9 @@
 
             <td>
                 <span th:if="${employee}">
-                <input type="button" value="Subir"  th:attr="onClick=|orderCargoRowUp(${colq?.wayId});|"/>
-                <input type="button" value="Bajar"  th:attr="onCLick=|orderCargoRowDown(${colq?.wayId});|"/>
-                <input type="button" value="Borrar" th:attr="onClick=|orderCargoRowDelete(${colq?.wayId});|"/>
+                <input type="button" value="Up"  th:attr="onClick=|orderCargoRowUp(${colq?.wayId});|"/>
+                <input type="button" value="Down"  th:attr="onCLick=|orderCargoRowDown(${colq?.wayId});|"/>
+                <input type="button" value="Delete" th:attr="onClick=|orderCargoRowDelete(${colq?.wayId});|"/>
                 </span>
             </td>
         </tr>

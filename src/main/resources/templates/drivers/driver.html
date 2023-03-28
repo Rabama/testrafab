@@ -1,0 +1,35 @@
+<h3>Drivers driver entity</h3>
+
+<br><br>
+
+<label for="id">Id:</label>
+<input type="text" id="id" name="id" th:value="${driver?.id}" readonly maxlength="5">
+<br><br>
+
+<label for="name">Name:</label>
+<input type="text" id="name" name="name" th:value="${driver?.name}">
+<br><br>
+
+<label for="surname">Surname:</label>
+<input type="text" id="surname" name="surname" th:value="${driver?.surname}">
+<br><br>
+
+<label for="workedhours">Worked hours:</label>
+<input type="text" id="workedhours" name="workedhours" th:value="${driver?.workedHours}">
+<br><br>
+
+<label for="status">Status:</label>
+<select id="status" name="status">
+    <option th:each="Opt : ${statusValues}"
+            th:value="${Opt}"
+            th:text="${Opt}"
+            th:selected="${Opt} == ${driver?.status}"></option>
+</select>
+<br><br>
+
+Username:     <input type="text" id="username" name="username" th:value="${driver?.username}" readonly/>
+
+Password: <input type="password" id="password" name="password"/>
+<br><br>
+
+<input type="button" value="Save" onclick="saveDriverExt();">

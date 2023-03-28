@@ -1,5 +1,6 @@
 <h3>Cargo entity</h3>
 
+<<<<<<< HEAD
 <br><br>
 
 <form action="/savecargo" method="POST">
@@ -60,3 +61,107 @@
 
 <button type="button" onclick="newT01();">New</button>
 <button type="button" onclick="delT01();">Delete</button>
+=======
+<hr><br>
+
+<!--@thymesVar id="cargo" type=".entities.Cargo.Cargo"-->
+<!--@thymesVar id="cargo?.id" type="java.lang.Long"-->
+<!--@thymesVar id="statusValues" type=".entities.Cargo.CargoStatus"-->
+
+<!--<label for="id">Id:</label>-->
+<input type="hidden" id="id" name="id" th:value="${cargo?.id}" size="4" readonly>
+<!--<br><br>-->
+
+<label for="name">Name:</label>
+<input type="text" id="name" name="name" th:value="${cargo?.name}">
+<!-- <button type="button" onclick="queryHead('name', 'id', 'id', 'queryname', '/queries/cargo/head/0', 'consultas');">Search</button> -->
+<!--<button type="button" onclick="cargoSearch();">Search</button>-->
+<br><br>
+
+<label for="weight">Weight:</label>
+<input type="text" id="weight" name="weight" th:value="${cargo?.weight}">
+<br><br>
+
+<label for="status">Status:</label>
+<select id="status" name="status">
+  <option th:each="Opt : ${statusValues}"
+          th:value="${Opt}"
+          th:text="${Opt}"
+          th:selected="${Opt} == ${cargo?.status}"></option>
+</select>
+<br><br>
+
+
+<label for="upcity">City:</label>
+<input type="text" id="upcity" name="upcity" onchange="getCargoUpCity();" th:value="${upcity}" size="4" readonly>
+<label for="upcityname">Upload city:</label>
+<input type="text" id="upcityname" name="upcityname" th:value="${upcityname}">
+<button type="button" onclick="queryHead('upcityname', 'id', 'upcity', 'queryname', '/queries/city/head/1', 'consultas');">Buscar</button>
+<button type="button" onclick="cargoUpCityClear();">Clear</button>
+<br><br>
+
+<label for="uncity">City:</label>
+<input type="text" id="uncity" name="uncity" onchange="getCargoUnCity();" th:value="${uncity}" size="4" readonly>
+<label for="uncityname">Unload city:</label>
+<input type="text" id="uncityname" name="uncityname" th:value="${uncityname}">
+<button type="button" onclick="queryHead('uncityname', 'id', 'uncity', 'queryname', '/queries/city/head/1', 'consultas');">Buscar</button>
+<button type="button" onclick="cargoUnCityClear();">Clear</button>
+<br><br>
+
+<button type="button" onclick="cargoSearch();">Search</button>
+<input type="button" value="Save" onclick="saveCargo();">
+
+<button type="button" onclick="newCargo();">New</button>
+<button type="button" onclick="delCargo();">Delete</button>
+
+<!--
+<br><hr><br>
+
+<label> Upload city</label>
+<br>
+<label for="driver1id">Driver 1:</label>
+<input type="text" id="driver1id" name="driver1id" onchange="getCargoDriver1();" th:value="${driver1idUp}" maxlength="4" size="4" readonly>
+<label for="driver1name">Name:</label>
+<input type="text" id="driver1name" name="driver1name" th:value="${driver1nameUp}" readonly>
+<br><br>
+
+<label for="driver2id">Driver 2:</label>
+<input type="text" id="driver2id" name="driver2id" onchange="getCargoDriver2();" th:value="${driver2idUp}" maxlength="4" size="4" readonly>
+<label for="driver2name">Name:</label>
+<input type="text" id="driver2name" name="driver2name" th:value="${driver2nameUp}" readonly>
+<br><br>
+
+<label for="driver3id">Driver 3:</label>
+<input type="text" id="driver3id" name="driver3id" onchange="getCargoDriver3();" th:value="${driver3idUp}" maxlength="4" size="4" readonly>
+<label for="driver3name">Name:</label>
+<input type="text" id="driver3name" name="driver3name" th:value="${driver3nameUp}" readonly>
+<br><br>
+
+<label for="hours">Hours:</label>
+<input type="text" id="hours" name="hours" th:value="${hoursUp}" maxlength="4" size="4" readonly>
+<br><br><br>
+
+<label> Unload city</label>
+<br>
+<label for="driver1id">Driver 1:</label>
+<input type="text" id="driver1id" name="driver1id" onchange="getCargoDriver1();" th:value="${driver1idUn}" maxlength="4" size="4" readonly>
+<label for="driver1name">Name:</label>
+<input type="text" id="driver1name" name="driver1name" th:value="${driver1nameUn}" readonly>
+<br><br>
+
+<label for="driver2id">Driver 2:</label>
+<input type="text" id="driver2id" name="driver2id" onchange="getCargoDriver2();" th:value="${driver2idUn}" maxlength="4" size="4" readonly>
+<label for="driver2name">Name:</label>
+<input type="text" id="driver2name" name="driver2name" th:value="${driver2nameUn}" readonly>
+<br><br>
+
+<label for="driver3id">Driver 3:</label>
+<input type="text" id="driver3id" name="driver3id" onchange="getCargoDriver3();" th:value="${driver3idUn}" maxlength="4" size="4" readonly>
+<label for="driver3name">Name:</label>
+<input type="text" id="driver3name" name="driver3name" th:value="${driver3nameUn}" readonly>
+<br><br>
+
+<label for="hours">Hours:</label>
+<input type="text" id="hours" name="hours" th:value="${hoursUn}" maxlength="4" size="4" readonly>
+<br><br>-->
+>>>>>>> origin/master

@@ -1,0 +1,21 @@
+<h3>User Registration</h3>
+
+<br><br>
+
+<pre>
+
+Id:       <input type="text" id="userid" name="userid" th:value="${user?.id}" size="4" readonly/>
+
+Name:     <input type="text" id="username" name="username" th:value="${user?.username}"/>
+          <button type="button" onclick="queryHead('username', 'id', 'userid', 'queryusername', '/user/head/0', 'consultas');">Buscar</button>
+
+Password: <input type="password" id="password" name="password"/>
+
+Role(s):  <input type="checkbox" id="admin"    name="roles" value="Admin" th:checked="${isAdmin}"/>Admin
+          <input type="checkbox" id="employee" name="roles" value="Employee" th:checked="${isEmployee}"/>Employee
+          <input type="checkbox" id="driver"   name="roles" value="Driver" th:checked="${isDriver}"/>Driver
+
+          <input type="button" value="Register" onclick="adminSaveUser();"/>
+
+</pre>
+

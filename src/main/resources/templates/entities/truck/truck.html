@@ -1,0 +1,70 @@
+<h3>Truck entity</h3>
+
+<br><br>
+
+<form action="#" method="POST">
+
+  <label for="id">Id:</label>
+  <input type="text" id="id" name="id" th:value="${truck?.id}">
+  <!--    <button type="button" id="select" onclick="getEntity('truck','id')">Select</button> -->
+  <br><br>
+
+  <label for="number">Number:</label>
+  <input type="text" id="number" name="number" th:value="${truck?.number}">
+  <button type="button" onclick="queryHead('number', 'id', 'id', 'querynumber', '/truck/query/head/0', 'consultas');">Buscar</button>
+  <br><br>
+
+  <label for="capacity">Capacity:</label>
+  <input type="text" id="capacity" name="capacity" th:value="${truck?.capacity}">
+  <br><br>
+  <!--
+      <label for="status">Status:</label>
+      <select id="status" name="status" size="1">
+          <option th:value="'OK'" th:text="OK" selected></option>
+          <option th:value="'NOK'" th:text="NOK"></option>
+      </select>
+      <br><br>
+  -->
+  <label for="status">Status:</label>
+  <select id="status" name="status">
+    <option th:each="Opt : ${statusValues}"
+            th:value="${Opt}"
+            th:text="${Opt}"
+            th:selected="${Opt} == ${truck?.status}"></option>
+  </select>
+  <br><br>
+
+
+
+  <!--
+      <select th:field="*{truck.status}">
+          <option th:each="type : ${allTypes}"
+                  th:value="${truck?.status}"
+                  th:text="#{${'seedstarter.type.' + truck.status}}">Wireframe</option>
+      </select>
+  -->
+  <!--
+      <label for="status">Status:</label>
+      <select id="status" th:field="${truck?.status}">
+          <option th:each="state : ${T(es.tatanca.z06.entities.Truck.Truck.status).values()}" th:value="${state}" th:text="${state}"></option>
+      </select>
+  -->
+
+  <label for="cityid">City:</label>
+  <input type="text" id="cityid" name="cityid" onchange="getTruckCity();" th:value="${cityid}">
+  <label for="cityname">Name:</label>
+  <input type="text" id="cityname" name="cityname" th:value="${cityname}">
+  <button type="button" onclick="queryHead('cityname', 'id', 'cityid', 'queryname', '/city/query/head/1', 'consultas');">Buscar</button>
+
+  <!--    <button type="button" th:attr="onclick=|httpRequest2('/queries/like/', 'city.name', 'consultas');|">Buscar</button> -->
+  <br><br>
+
+  <input type="button" value="Save" onclick="saveTruck();">
+
+</form>
+
+<br><br>
+
+<button type="button" onclick="newTruck();">New truck</button>
+<button type="button" onclick="delTruck();">Delete truck</button>
+

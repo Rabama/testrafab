@@ -1,0 +1,26 @@
+<div id="queryHead">
+
+  <h3>Driver query head</h3>
+
+  <div id="valor"></div>
+  <div id="origenFd"></div>
+  <div id="destinoId"></div>
+
+  <label for="queryname">Name:</label>
+  <input type="text" id="queryname" name="queryname">
+
+  <label for="querystatus">Status:</label>
+  <select id="querystatus" name="querystatus" size="1">
+    <option value="0" selected>Work</option>
+    <option value="1">Rest</option>
+  </select>
+
+  <button type="button" id="search" th:attr="onClick=|findDriver(${mode});|">Search</button>
+
+  <hr>
+
+</div>
+
+<div id="queryBody">
+
+</div>

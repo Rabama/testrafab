@@ -1,0 +1,32 @@
+<h3>Driver query body</h3>
+
+Prueba: <span th:text="${prueba}"></span><br>
+Mode: <span th:text="${mode}"></span><br>
+
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Status</th>
+        <th>------</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="driverq:${driverList}">
+        <td th:text="${driverq?.id}"></td>
+        <td th:text="${driverq?.name}"></td>
+        <td th:text="${driverq?.status}"></td>
+
+        <td>
+            <span th:if="${mode == 0}">
+                <button type="button" th:attr="onClick=|loadDriver(${driverq?.id});|">Select</button>
+            </span>
+            <span th:unless="${mode == 0}">
+                <button type="button" th:attr="onClick=|querySelectById(${driverq?.id});|">Select</button>
+            </span>
+        </td>
+
+    </tr>
+    </tbody>
+</table>

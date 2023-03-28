@@ -1,0 +1,22 @@
+<div id="queryHead">
+
+  <h3>City query head</h3>
+
+  <div id="valor"></div>
+  <div id="origenFd"></div>
+  <div id="destinoId"></div>
+
+  Mode: <h3 th:text="${mode}"></h3>
+
+  <label for="queryname">Name:</label>
+  <input type="text" id="queryname" name="queryname">
+  <!--    <button type="button" id="search" onclick="findCity();">Search</button> -->
+  <button type="button" id="search" th:attr="onClick=|findCity(${mode});|">Search</button></td>
+
+  <hr>
+
+</div>
+
+<div id="queryBody">
+
+</div>

@@ -54,6 +54,7 @@ function loadOrder(id) {
 
             orderWeight();
             orderHours();
+            orderTableHours();
 
         }
     };
